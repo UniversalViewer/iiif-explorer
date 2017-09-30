@@ -29,4 +29,4 @@
     x.setAttribute('data-path', publicPath);
     x.setAttribute('data-core', appCore);
     document.head.appendChild(x);
-})(window, document, "myname","/build/myname/","myname.core.js","myname.core.pf.js",[["MY-NAME","my-name",{"$":"my-name"},[["first",1],["last",1]]]]);
+})(window, document, "myname","/build/myname/","myname.core.js","myname.core.pf.js",[["MY-DROPDOWN","my-dropdown",{"$":"my-dropdown"},[["title",1]],0,1],["MY-NAME","my-name",{"$":"my-name"},[["first",1],["last",1]],[["onToggle","log"]]]]);

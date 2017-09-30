@@ -1792,18 +1792,30 @@ var s=document.querySelector("script[data-core='myname.core.js'][data-path]");if
         }
         Object.defineProperty(obj, propertyKey, descriptor);
     }
-    function proxyControllerProp(domApi, controllerComponents, obj, ctrlTag, proxyMethodName) {
-        obj[proxyMethodName] = function () {
-            var orgArgs = arguments;
-            return new Promise(function (resolve) {
-                var ctrlElm = controllerComponents[ctrlTag];
-                if (!ctrlElm) {
-                    ctrlElm = controllerComponents[ctrlTag] = domApi.$createElement(ctrlTag);
-                    domApi.$appendChild(domApi.$body, ctrlElm);
-                }
-                ctrlElm.componentOnReady(function (ctrlElm) {
-                    ctrlElm[proxyMethodName].apply(ctrlElm, orgArgs).then(resolve);
-                });
+    function proxyController(domApi, controllerComponents, ctrlTag) {
+        return {
+            'create': proxyProp(domApi, controllerComponents, ctrlTag, 'create'),
+            'componentOnReady': proxyProp(domApi, controllerComponents, ctrlTag, 'componentOnReady')
+        };
+    }
+    function loadComponent(domApi, controllerComponents, ctrlTag) {
+        return new Promise(function (resolve) {
+            var ctrlElm = controllerComponents[ctrlTag];
+            if (!ctrlElm) {
+                ctrlElm = domApi.$body.querySelector(ctrlTag);
+            }
+            if (!ctrlElm) {
+                ctrlElm = controllerComponents[ctrlTag] = domApi.$createElement(ctrlTag);
+                domApi.$appendChild(domApi.$body, ctrlElm);
+            }
+            ctrlElm.componentOnReady(resolve);
+        });
+    }
+    function proxyProp(domApi, controllerComponents, ctrlTag, proxyMethodName) {
+        return function () {
+            var args = arguments;
+            return loadComponent(domApi, controllerComponents, ctrlTag).then(function (ctrlElm) {
+                return ctrlElm[proxyMethodName].apply(ctrlElm, args);
             });
         };
     }
@@ -2228,9 +2240,7 @@ var s=document.querySelector("script[data-core='myname.core.js'][data-path]");if
             console.error(type, err, elm.tagName);
         }
         function propConnect(ctrlTag) {
-            var obj = {};
-            proxyControllerProp(domApi, controllerComponents, obj, ctrlTag, 'create');
-            return obj;
+            return proxyController(domApi, controllerComponents, ctrlTag);
         }
         function getContextItem(contextKey) {
             return Context[contextKey];

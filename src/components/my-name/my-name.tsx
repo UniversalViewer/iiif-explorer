@@ -1,5 +1,5 @@
 import { Component, Prop } from '@stencil/core';
-
+import { Listen } from '@stencil/core';
 
 @Component({
   tag: 'my-name',
@@ -17,5 +17,10 @@ export class MyName {
         Hello, my name is {this.first} {this.last}
       </p>
     );
+  }
+
+  @Listen('onToggle') // Listen to the onToggle event from the dropdown component
+  log(event) {
+    console.log(event);
   }
 }

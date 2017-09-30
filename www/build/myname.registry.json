@@ -2,6 +2,21 @@
   "namespace": "myname",
   "components": [
     [
+      "MY-DROPDOWN",
+      "my-dropdown",
+      {
+        "$": "my-dropdown"
+      },
+      [
+        [
+          "title",
+          1
+        ]
+      ],
+      0,
+      1
+    ],
+    [
       "MY-NAME",
       "my-name",
       {
@@ -15,6 +30,12 @@
         [
           "last",
           1
+        ]
+      ],
+      [
+        [
+          "onToggle",
+          "log"
         ]
       ]
     ]

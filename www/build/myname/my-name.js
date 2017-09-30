@@ -14,6 +14,9 @@ var MyName = /** @class */ (function () {
             this.first, t(" "),
             this.last));
     };
+    MyName.prototype.log = function (event) {
+        console.log(event);
+    };
     return MyName;
 }());
 
