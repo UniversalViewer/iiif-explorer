@@ -20,12 +20,14 @@
     -->
 
     <script>
-        function onSelectManifest(manifest) {
-            alert(manifest);
-        }
+        window.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('onSelectManifest', (evt) => {
+                alert(evt.detail.getDefaultLabel());
+            });
+        });
     </script>
 
-    <iiif-explorer manifest="http://digital.library.villanova.edu/Collection/vudl:3/IIIF" onSelectManifest="onSelectManifest()"></iiif-explorer>
+    <iiif-explorer manifest="http://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer>
 
 </body>
 </html>
