@@ -1,8 +1,8 @@
 exports.config = {
-  namespace: 'myname',
+  namespace: 'iiifexplorer',
   generateDistribution: true,
   bundles: [
-    { components: ['my-name'] }
+    { components: ['iiif-explorer', 'iiif-explorer-item'] }
   ]
 };
 

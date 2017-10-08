@@ -19,40 +19,40 @@ importScripts('workbox-sw.prod.v2.0.3.js');
  */
 const fileManifest = [
   {
-    "url": "build/myname.js",
-    "revision": "2b9572171926a14a39968f9b61d15811"
+    "url": "build/iiifexplorer.js",
+    "revision": "247f518de0f91f06a18d5174c85286a2"
   },
   {
-    "url": "build/myname.registry.json",
-    "revision": "cff5d43dfc37dbf464e6bba343f53dc5"
+    "url": "build/iiifexplorer.registry.json",
+    "revision": "54d97b18a4724aeedc0c8f00b9fdccce"
   },
   {
-    "url": "build/myname/5jmzkg1i.js",
-    "revision": "e0ba87f005e572a8e5459444eba214f1"
+    "url": "build/iiifexplorer/ihpfroda.js",
+    "revision": "600b4f657a24eef8f589a4fc00e4df51"
   },
   {
-    "url": "build/myname/mxkxvvjy.js",
-    "revision": "b0ef495bf8b6b681bed09ca6d48923d3"
+    "url": "build/iiifexplorer/iiifexplorer.ckjjew2b.js",
+    "revision": "a71095d12de49eea1089dbef82ecda89"
   },
   {
-    "url": "build/myname/myname.bio1c9da.pf.js",
-    "revision": "96e50db1754204d582c6bfb036f7fd8b"
+    "url": "build/iiifexplorer/iiifexplorer.qwfigcny.pf.js",
+    "revision": "1e7f572eec03f8f0459e94ed981ac9f2"
   },
   {
-    "url": "build/myname/myname.q4rzytoz.js",
-    "revision": "9fed51b48891c75b401ffc9f188156ae"
+    "url": "build/iiifexplorer/p6ybjbzy.js",
+    "revision": "83c998ae69bbc6f8604c9c67e628ddc5"
   },
   {
-    "url": "build/myname/uyykddxl.css",
-    "revision": "3d50550407a0c0d076cccbe0d3ec717b"
+    "url": "build/iiifexplorer/vbsm3pb7.css",
+    "revision": "df1f4b48bba13b7e02c3759a863b0749"
   },
   {
-    "url": "build/myname/zh1kjm1r.css",
-    "revision": "e1729c20990cdc6cc2d5c1ebd234c706"
+    "url": "build/iiifexplorer/vqqekv6w.css",
+    "revision": "881261b097d58c5e7d7d6ce8fe6a0878"
   },
   {
     "url": "index.html",
-    "revision": "d9372393c9e9fe044a7d593623d68b9d"
+    "revision": "6a063964a380c0766456ae61e93dfd04"
   }
 ];
 

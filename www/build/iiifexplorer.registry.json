@@ -1,0 +1,52 @@
+{
+  "namespace": "iiifexplorer",
+  "components": [
+    [
+      "IIIF-EXPLORER",
+      "ihpfroda",
+      {
+        "$": "vbsm3pb7"
+      },
+      [
+        [
+          "manifest",
+          1
+        ]
+      ],
+      [
+        [
+          "onSelectBreadcrumb",
+          "breadcrumbSelected"
+        ],
+        [
+          "onSelectItem",
+          "itemSelected"
+        ]
+      ]
+    ],
+    [
+      "IIIF-EXPLORER-BREADCRUMB",
+      "p6ybjbzy",
+      {
+        "$": "vqqekv6w"
+      }
+    ],
+    [
+      "IIIF-EXPLORER-ITEM",
+      "ihpfroda",
+      {
+        "$": "vbsm3pb7"
+      },
+      [
+        [
+          "selected",
+          1,
+          1
+        ]
+      ]
+    ]
+  ],
+  "loader": "iiifexplorer.js",
+  "core": "iiifexplorer/iiifexplorer.ckjjew2b.js",
+  "corePolyfilled": "iiifexplorer/iiifexplorer.qwfigcny.pf.js"
+}
