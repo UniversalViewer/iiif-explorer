@@ -1,14 +1,14 @@
 {
-  "name": "my-name",
+  "name": "iiif-explorer",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "IIIF Explorer Component",
   "main": "dist/collection/index.js",
   "types": "dist/collection/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
-  "browser": "dist/myname.js",
+  "browser": "dist/iiifexplorer.js",
   "scripts": {
     "build": "stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
@@ -16,11 +16,14 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@stencil/core": "0.0.6-0"
+    "@stencil/core": "0.0.6-0",
+    "manifold": "viewdir/manifold",
+    "manifesto.js": "viewdir/manifesto"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest"
+    "@stencil/utils": "latest",
+    "classnames": "^2.2.5"
   },
   "repository": {
     "type": "git",
