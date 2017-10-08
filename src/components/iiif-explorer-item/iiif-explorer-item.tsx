@@ -32,7 +32,7 @@ export class IIIFExplorerItem {
 
 		return (
 			<div class={divClasses}>
-				<a onClick={() => this._itemSelectedHandler()} class={aClasses} href="#" title={this.member.getDefaultLabel()}>
+				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.member.getDefaultLabel()}>
 					{this.member.getDefaultLabel()}
 				</a>
 			</div>

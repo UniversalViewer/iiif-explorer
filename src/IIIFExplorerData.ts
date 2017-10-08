@@ -1,5 +1,5 @@
 export interface IIIFExplorerData {
-    selected: Manifesto.IIIFResource | null;
+    selected: Manifesto.IManifest | null;
     current: Manifesto.ICollection;
-    parents: Manifesto.IIIFResource[];
+    parents: Manifesto.ICollection[];
 }
