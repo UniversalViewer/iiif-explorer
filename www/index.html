@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>IIIF Explorer Component</title>
+  <script src="https://rawgit.com/viewdir/manifold/master/dist/manifold.bundle.js"></script>
+  <script src="build/iiifexplorer.js"></script>
+</head>
+<body>
+
+    <!--
+    http://wellcomelibrary.org/iiif/b18035978/manifest (Biocrats)
+    http://wellcomelibrary.org/iiif/b18035723/manifest (Wunder der Vererbung)
+    http://wellcomelibrary.org/iiif/collection/b19974760 (Chemist and Druggist)
+    http://wellcomelibrary.org/iiif/collection/b18031511 (Biological Basis of Medicine)
+    http://digital.library.villanova.edu/Collection/vudl:3/IIIF (Villanova Collection)
+    http://dams.llgc.org.uk/iiif/newspapers/4651124.json (Abergele and Pensarn Visitor 1909-1910)
+    https://edsilv.github.io/test-manifests/all-metadata.json (all metadata)
+    -->
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('onSelectManifest', (evt) => {
+                alert(evt.detail.getDefaultLabel());
+            });
+
+            document.addEventListener('onSelectCollection', (evt) => {
+                //alert(evt.detail.getDefaultLabel());
+            });
+        });
+    </script>
+
+    <iiif-explorer manifest="http://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer>
+
+
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('service worker registered', reg))
+          .catch(err => console.log('service worker error', err));
+      });
+    }
+  </script>
+
+</body>
+</html>
