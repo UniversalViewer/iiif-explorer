@@ -19,6 +19,7 @@ export class IIIFExplorer {
 	@State() data: IIIFExplorerData = null;
 
 	@Event() onSelectManifest: EventEmitter;
+	@Event() onSelectCollection: EventEmitter;
 
 	componentWillLoad() {
 
@@ -156,6 +157,7 @@ export class IIIFExplorer {
 
 		if (member.isCollection()) {
 			this._switchToFolder(member as Manifesto.Collection);
+			this.onSelectCollection.emit(member);
 		} else {
 			this._selected = member as Manifesto.IManifest;
 			this.onSelectManifest.emit(member);

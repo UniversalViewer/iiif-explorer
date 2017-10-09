@@ -24,6 +24,10 @@
             document.addEventListener('onSelectManifest', (evt) => {
                 alert(evt.detail.getDefaultLabel());
             });
+
+            document.addEventListener('onSelectCollection', (evt) => {
+                alert(evt.detail.getDefaultLabel());
+            });
         });
     </script>
 
