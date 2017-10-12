@@ -20,19 +20,23 @@ importScripts('workbox-sw.prod.v2.0.3.js');
 const fileManifest = [
   {
     "url": "build/iiifexplorer.js",
-    "revision": "fe46e835ee9c7d05e33cc41eea0bedd4"
+    "revision": "923378524eaa28d87e48e47747cc2e48"
   },
   {
     "url": "build/iiifexplorer.registry.json",
-    "revision": "91f2fa49f0ea5dd8641f54803f7d5f69"
+    "revision": "94873edcf95454f37302c699bc67a32e"
   },
   {
-    "url": "build/iiifexplorer/2nbrirmj.css",
-    "revision": "fa020b0464fcff95f84d24c84b06cd26"
+    "url": "build/iiifexplorer/0isz4s0k.css",
+    "revision": "bff65aed93c3629ecd9649be6687b99d"
   },
   {
-    "url": "build/iiifexplorer/hoddpwtr.js",
-    "revision": "138751835a96fa5ac29c2257c7241d51"
+    "url": "build/iiifexplorer/9kqelgkq.css",
+    "revision": "de2f45df81119d0b64db7ffde7a05c76"
+  },
+  {
+    "url": "build/iiifexplorer/cdunksrh.js",
+    "revision": "7030ad0c976448f38cbf2ea51ce702aa"
   },
   {
     "url": "build/iiifexplorer/iiifexplorer.ckjjew2b.js",
@@ -43,16 +47,12 @@ const fileManifest = [
     "revision": "1e7f572eec03f8f0459e94ed981ac9f2"
   },
   {
-    "url": "build/iiifexplorer/pdoylirx.js",
-    "revision": "9ee7b86282a35027cebc2b704c3fd87b"
-  },
-  {
-    "url": "build/iiifexplorer/vqqekv6w.css",
-    "revision": "881261b097d58c5e7d7d6ce8fe6a0878"
+    "url": "build/iiifexplorer/rigz0yyv.js",
+    "revision": "bc6102bee244efca1920039423eb2643"
   },
   {
     "url": "index.html",
-    "revision": "15c88496ad0be4d206d0333220d99414"
+    "revision": "18d2efc35546f038ec11d49899fadb76"
   }
 ];
 

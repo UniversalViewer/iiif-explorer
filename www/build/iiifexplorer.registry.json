@@ -3,13 +3,18 @@
   "components": [
     [
       "IIIF-EXPLORER",
-      "pdoylirx",
+      "cdunksrh",
       {
-        "$": "2nbrirmj"
+        "$": "9kqelgkq"
       },
       [
         [
           "manifest",
+          1
+        ],
+        [
+          "upLevelEnabled",
+          1,
           1
         ]
       ],
@@ -26,16 +31,23 @@
     ],
     [
       "IIIF-EXPLORER-BREADCRUMB",
-      "hoddpwtr",
+      "cdunksrh",
       {
-        "$": "vqqekv6w"
+        "$": "9kqelgkq"
+      }
+    ],
+    [
+      "IIIF-EXPLORER-BREADCRUMBTRAIL",
+      "rigz0yyv",
+      {
+        "$": "0isz4s0k"
       }
     ],
     [
       "IIIF-EXPLORER-ITEM",
-      "pdoylirx",
+      "cdunksrh",
       {
-        "$": "2nbrirmj"
+        "$": "9kqelgkq"
       },
       [
         [

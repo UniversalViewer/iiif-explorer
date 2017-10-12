@@ -132,13 +132,8 @@ export class IIIFExplorer {
 
 			return ( 
 				<div>
-					<div class="breadcrumbs">
-					{
-						this.data.parents.map((collection) => 
-							<iiif-explorer-breadcrumb collection={collection}></iiif-explorer-breadcrumb>
-						)
-					}
-					</div>
+					<span>{this.data.parents.length}</span>
+					<iiif-explorer-breadcrumbtrail collections={this.data.parents}></iiif-explorer-breadcrumbtrail>
 					<hr/>
                     <div class="items">
 					{
