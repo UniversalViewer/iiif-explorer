@@ -20,19 +20,19 @@ importScripts('workbox-sw.prod.v2.0.3.js');
 const fileManifest = [
   {
     "url": "build/iiifexplorer.js",
-    "revision": "0736d81ed9e8a89fce7653fb6420006e"
+    "revision": "0e440e31ff64ad0a18003ebeedd320e7"
   },
   {
     "url": "build/iiifexplorer.registry.json",
-    "revision": "2797922350797c7d2634e73e9a9d82cd"
+    "revision": "2717f9efc1034d4aec80eb99292d2890"
   },
   {
     "url": "build/iiifexplorer/2nbrirmj.css",
     "revision": "fa020b0464fcff95f84d24c84b06cd26"
   },
   {
-    "url": "build/iiifexplorer/bhoi2se2.js",
-    "revision": "8342f97aef70e42cac1a74fba5510626"
+    "url": "build/iiifexplorer/hoddpwtr.js",
+    "revision": "138751835a96fa5ac29c2257c7241d51"
   },
   {
     "url": "build/iiifexplorer/iiifexplorer.ckjjew2b.js",
@@ -43,8 +43,8 @@ const fileManifest = [
     "revision": "1e7f572eec03f8f0459e94ed981ac9f2"
   },
   {
-    "url": "build/iiifexplorer/p6ybjbzy.js",
-    "revision": "83c998ae69bbc6f8604c9c67e628ddc5"
+    "url": "build/iiifexplorer/qg1gcjwo.js",
+    "revision": "10c79aa0f1a6f331dcfbe9abe97423a1"
   },
   {
     "url": "build/iiifexplorer/vqqekv6w.css",
@@ -52,7 +52,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "15c88496ad0be4d206d0333220d99414"
+    "revision": "19e848b68fbff0322db725de1872ab2c"
   }
 ];
 

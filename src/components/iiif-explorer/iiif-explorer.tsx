@@ -15,6 +15,8 @@ export class IIIFExplorer {
 	private _parents: Manifesto.ICollection[] = [];
 
 	@Prop() manifest: string;
+	@Prop() breadcrumbsEnabled: boolean = true;
+	@Prop() upLevelEnabled: boolean = true;
 
 	@State() data: IIIFExplorerData = null;
 
@@ -41,12 +43,12 @@ export class IIIFExplorer {
                     while (start && !start.isCollection()) {
                         start = parents.pop();
                     }
-                    this._switchToFolder(start as Manifesto.Collection);
+                    this._switchToFolder(start as Manifesto.ICollection);
                 });
             }
 
 			if (root.isCollection()) {
-                this._switchToFolder(root as Manifesto.Collection);
+                this._switchToFolder(root as Manifesto.ICollection);
             } else {
                 this._selected = root as Manifesto.IManifest;
             }
@@ -57,14 +59,14 @@ export class IIIFExplorer {
         });
 	}
 
-	private _gotoBreadcrumb(node: Manifesto.Collection): void {
+	private _gotoBreadcrumb(node: Manifesto.ICollection): void {
 		let index: number = this._parents.indexOf(node);
 		this._current = this._parents[index];
 		this._parents = this._parents.slice(0, index + 1);
 		this._updateState();
 	}
 
-	private _sortCollectionsFirst(a: Manifesto.IIIFResource, b: Manifesto.IIIFResource): number {
+	private _sortCollectionsFirst(a: Manifesto.IIIIFResource, b: Manifesto.IIIIFResource): number {
 		let aType = a.getIIIFResourceType().value;
 		let bType = b.getIIIFResourceType().value;
 		if (aType === bType) {
@@ -79,7 +81,7 @@ export class IIIFExplorer {
 		return bType.indexOf('collection') - aType.indexOf('collection');
 	}
 
-	private _switchToFolder(node: Manifesto.Collection): void {
+	private _switchToFolder(node: Manifesto.ICollection): void {
 		if (!node.isLoaded) {
 			node.load().then(this._switchToFolder.bind(this));
 		} else {
@@ -99,9 +101,9 @@ export class IIIFExplorer {
 
 			Manifesto.Utils.loadResource(url)
 				.then((parent: any) => {
-				  	let parentManifest = manifesto.create(parent);
+				  	const parentManifest: Manifesto.IIIIFResource = manifesto.create(parent);
 				  	if (parentManifest.getProperty('within')) {
-					  	this._followWithin(parentManifest).then((array: Manifesto.IIIFResource[]) => {
+					  	this._followWithin(parentManifest).then((array: Manifesto.IIIIFResource[]) => {
 						  	array.push(node);
 						  	resolve(array);
 					  	});
@@ -132,16 +134,16 @@ export class IIIFExplorer {
 				<div>
 					<div class="breadcrumbs">
 					{
-						this.data.parents.map((member) => 
-							<iiif-explorer-breadcrumb member={member}></iiif-explorer-breadcrumb>
+						this.data.parents.map((collection) => 
+							<iiif-explorer-breadcrumb collection={collection}></iiif-explorer-breadcrumb>
 						)
 					}
 					</div>
 					<hr/>
                     <div class="items">
 					{
-						this.data.current.members.map((member) => 	
-							<iiif-explorer-item member={member} selected={this._selected === member}></iiif-explorer-item>
+						this.data.current.members.map((item) => 	
+							<iiif-explorer-item item={item} selected={this._selected === item}></iiif-explorer-item>
 						)
 					}
 					</div>
@@ -153,20 +155,20 @@ export class IIIFExplorer {
 	@Listen('onSelectItem')
 	itemSelected(event: CustomEvent) {
 
-		const member: Manifesto.IIIIFResource = event.detail;
+		const item: Manifesto.IIIIFResource = event.detail;
 
-		if (member.isCollection()) {
-			this._switchToFolder(member as Manifesto.Collection);
-			this.onSelectCollection.emit(member);
+		if (item.isCollection()) {
+			this._switchToFolder(item as Manifesto.Collection);
+			this.onSelectCollection.emit(item);
 		} else {
-			this._selected = member as Manifesto.IManifest;
-			this.onSelectManifest.emit(member);
+			this._selected = item as Manifesto.IManifest;
+			this.onSelectManifest.emit(item);
 		}
 	}
 
 	@Listen('onSelectBreadcrumb')
 	breadcrumbSelected(event: CustomEvent) {
-		const member: Manifesto.Collection = event.detail;
-		this._gotoBreadcrumb(member);
+		const item: Manifesto.Collection = event.detail;
+		this._gotoBreadcrumb(item);
 	}
 }

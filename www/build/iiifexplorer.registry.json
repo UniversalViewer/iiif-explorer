@@ -3,13 +3,23 @@
   "components": [
     [
       "IIIF-EXPLORER",
-      "bhoi2se2",
+      "qg1gcjwo",
       {
         "$": "2nbrirmj"
       },
       [
         [
+          "breadcrumbsEnabled",
+          1,
+          1
+        ],
+        [
           "manifest",
+          1
+        ],
+        [
+          "upLevelEnabled",
+          1,
           1
         ]
       ],
@@ -26,14 +36,14 @@
     ],
     [
       "IIIF-EXPLORER-BREADCRUMB",
-      "p6ybjbzy",
+      "hoddpwtr",
       {
         "$": "vqqekv6w"
       }
     ],
     [
       "IIIF-EXPLORER-ITEM",
-      "bhoi2se2",
+      "qg1gcjwo",
       {
         "$": "2nbrirmj"
       },
