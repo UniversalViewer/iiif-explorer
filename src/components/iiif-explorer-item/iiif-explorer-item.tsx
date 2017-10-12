@@ -7,7 +7,7 @@ import classNames  from 'classnames';
 })
 export class IIIFExplorerItem {
 
-	@Prop() member: Manifesto.IIIIFResource;
+	@Prop() item: Manifesto.IIIIFResource;
 	@Prop() selected: boolean = false;
 
 	@Event() onSelectItem: EventEmitter;
@@ -17,29 +17,29 @@ export class IIIFExplorerItem {
 		const divClasses = classNames(
 			{ 
 				'selected': this.selected,
-				'explorer-folder': !!this.member.isCollection(),
-				'explorer-resource': !!this.member.isManifest()
+				'explorer-folder': !!this.item.isCollection(),
+				'explorer-resource': !!this.item.isManifest()
 			}
 		);
 
 		const aClasses = classNames(
 			{ 
-				'explorer-folder-link': !!this.member.isCollection(),
-				'explorer-item-link': !!this.member.isManifest(),
+				'explorer-folder-link': !!this.item.isCollection(),
+				'explorer-item-link': !!this.item.isManifest(),
 				'explorer-link': true
 			}
 		);
 
 		return (
 			<div class={divClasses}>
-				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.member.getDefaultLabel()}>
-					{this.member.getDefaultLabel()}
+				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.item.getDefaultLabel()}>
+					{this.item.getDefaultLabel()}
 				</a>
 			</div>
 		)
 	}
 
 	private _itemSelectedHandler() {
-		this.onSelectItem.emit(this.member);
+		this.onSelectItem.emit(this.item);
 	}
 }

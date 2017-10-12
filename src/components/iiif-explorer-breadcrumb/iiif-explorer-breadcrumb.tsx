@@ -6,7 +6,7 @@ import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 })
 export class IIIFExplorerBreadcrumb {
 
-	@Prop() member: Manifesto.IIIIFResource;
+	@Prop() collection: Manifesto.ICollection;
 
 	@Event() onSelectBreadcrumb: EventEmitter;
 
@@ -17,14 +17,14 @@ export class IIIFExplorerBreadcrumb {
                 <a 	onClick={() => this._breadcrumbSelectedHandler()}
                     class="explorer-breadcrumb-link explorer-link" 
                     href="#"
-                    title={this.member.getDefaultLabel()}>
-                    {this.member.getDefaultLabel()}
+                    title={this.collection.getDefaultLabel()}>
+                    {this.collection.getDefaultLabel()}
                 </a>
             </div>
 		)
 	}
 
 	private _breadcrumbSelectedHandler() {
-		this.onSelectBreadcrumb.emit(this.member);
+		this.onSelectBreadcrumb.emit(this.collection);
 	}
 }
