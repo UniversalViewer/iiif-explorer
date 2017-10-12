@@ -15,8 +15,8 @@ export class IIIFExplorer {
 	private _parents: Manifesto.ICollection[] = [];
 
 	@Prop() manifest: string;
-	@Prop() breadcrumbsEnabled: boolean = true;
-	@Prop() upLevelEnabled: boolean = true;
+	//@Prop() breadcrumbsEnabled: boolean = true;
+	//@Prop() upLevelEnabled: boolean = true;
 
 	@State() data: IIIFExplorerData = null;
 
