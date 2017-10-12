@@ -16,7 +16,7 @@ export class IIIFExplorer {
 
 	@Prop() manifest: string;
 	//@Prop() breadcrumbsEnabled: boolean = true;
-	//@Prop() upLevelEnabled: boolean = true;
+	@Prop() upLevelEnabled: boolean = true;
 
 	@State() data: IIIFExplorerData = null;
 

@@ -2,7 +2,7 @@ exports.config = {
   namespace: 'iiifexplorer',
   generateDistribution: true,
   bundles: [
-    { components: ['iiif-explorer', 'iiif-explorer-item'] }
+    { components: ['iiif-explorer', 'iiif-explorer-item', 'iiif-explorer-breadcrumb'] }
   ]
 };
 
