@@ -1,2 +1,32 @@
 /*! Built with http://stenciljs.com */
-!function(e,t,i,r,s,l,c,n,a){for((e[i]=e[i]||{}).components=c=c||[],(n=t.createElement("style")).setAttribute("data-styles",""),n.innerHTML=(c.map(function(e){return e[0]}).join(",")+"{visibility:hidden}.💎{visibility:inherit}").toLowerCase(),t.head.insertBefore(n,t.head.firstChild),i=i.toLowerCase(),a=(n=t.scripts).length-1;0<=a;a--)if(n[a].src&&n[a].src.split("/").pop()===i+".js"){r=n[a].src.replace(i+".js",i+"/");break}(n=t.createElement("script")).src=r+(e.customElements&&e.fetch?s:"iiifexplorer.qwfigcny.pf.js"),n.setAttribute("data-path",r),n.setAttribute("data-core",s),t.head.appendChild(n)}(window,document,"iiifexplorer","/build/iiifexplorer/","iiifexplorer.ckjjew2b.js",0,[["IIIF-EXPLORER","qbek1kib",{$:"9kqelgkq"},[["manifest",1],["upLevelEnabled",1,1]],[["onSelectBreadcrumb","breadcrumbSelected"],["onSelectItem","itemSelected"]]],["IIIF-EXPLORER-BREADCRUMB","qbek1kib",{$:"9kqelgkq"}],["IIIF-EXPLORER-ITEM","qbek1kib",{$:"9kqelgkq"},[["selected",1,1]]]]);
+(function (window, document, appNamespace, publicPath, appCore, appCorePolyfilled, components, x, i) {
+    'use strict';
+    // create global namespace if it doesn't already exist
+
+    (window[appNamespace] = window[appNamespace] || {}).components = components = components || [];
+    // auto hide components until they been fully hydrated
+    // reusing the "x" variable from the args for funzies
+    x = document.createElement('style');
+    x.setAttribute('data-styles', '');
+    x.innerHTML = (components.map(function (c) {
+        return c[0];
+    }).join(',') + '{visibility:hidden}.💎{visibility:inherit}').toLowerCase();
+    document.head.insertBefore(x, document.head.firstChild);
+    // get this current script
+    appNamespace = appNamespace.toLowerCase();
+    x = document.scripts;
+    for (i = x.length - 1; i >= 0; i--) {
+        if (x[i].src && x[i].src.split('/').pop() === appNamespace + '.js') {
+            publicPath = x[i].src.replace(appNamespace + '.js', appNamespace + '/');
+            break;
+        }
+    }
+    // request the core this browser needs
+    // test for native support of custom elements and fetch
+    // if either of those are not supported, then use the core w/ polyfills
+    x = document.createElement('script');
+    x.src = publicPath + (window.customElements && window.fetch ? appCore : appCorePolyfilled);
+    x.setAttribute('data-path', publicPath);
+    x.setAttribute('data-core', appCore);
+    document.head.appendChild(x);
+})(window, document, "iiifexplorer","/build/iiifexplorer/","iiifexplorer.core.js","iiifexplorer.core.pf.js",[["IIIF-EXPLORER","iiif-explorer",{"$":"iiif-explorer"},[["manifest",1],["upLevelEnabled",1,1]],[["onSelectBreadcrumb","breadcrumbSelected"],["onSelectItem","itemSelected"]]],["IIIF-EXPLORER-BREADCRUMB","iiif-explorer",{"$":"iiif-explorer"}],["IIIF-EXPLORER-ITEM","iiif-explorer",{"$":"iiif-explorer"},[["selected",1,1]]]]);

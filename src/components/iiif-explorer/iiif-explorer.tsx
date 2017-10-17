@@ -1,5 +1,4 @@
 /// <reference path="../../../node_modules/manifesto.js/dist/manifesto.d.ts" />
-/// <reference path="../../../node_modules/manifold/dist/manifold.d.ts" />
 
 import { Component, Prop, State, Listen, Event, EventEmitter } from '@stencil/core';
 import { IIIFExplorerData } from '../../IIIFExplorerData';

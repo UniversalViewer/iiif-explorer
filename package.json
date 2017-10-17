@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@stencil/core": "0.0.6-0",
-    "manifold": "viewdir/manifold",
     "manifesto.js": "viewdir/manifesto"
   },
   "devDependencies": {
