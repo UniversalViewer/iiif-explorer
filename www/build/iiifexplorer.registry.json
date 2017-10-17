@@ -3,9 +3,9 @@
   "components": [
     [
       "IIIF-EXPLORER",
-      "iiif-explorer",
+      "yk70kpwr",
       {
-        "$": "iiif-explorer"
+        "$": "9kqelgkq"
       },
       [
         [
@@ -31,16 +31,16 @@
     ],
     [
       "IIIF-EXPLORER-BREADCRUMB",
-      "iiif-explorer",
+      "yk70kpwr",
       {
-        "$": "iiif-explorer"
+        "$": "9kqelgkq"
       }
     ],
     [
       "IIIF-EXPLORER-ITEM",
-      "iiif-explorer",
+      "yk70kpwr",
       {
-        "$": "iiif-explorer"
+        "$": "9kqelgkq"
       },
       [
         [
@@ -52,6 +52,6 @@
     ]
   ],
   "loader": "iiifexplorer.js",
-  "core": "iiifexplorer/iiifexplorer.core.js",
-  "corePolyfilled": "iiifexplorer/iiifexplorer.core.pf.js"
+  "core": "iiifexplorer/iiifexplorer.ckjjew2b.js",
+  "corePolyfilled": "iiifexplorer/iiifexplorer.qwfigcny.pf.js"
 }
