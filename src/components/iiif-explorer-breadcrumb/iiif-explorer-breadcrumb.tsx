@@ -17,8 +17,8 @@ export class IIIFExplorerBreadcrumb {
                 <a 	onClick={() => this._breadcrumbSelectedHandler()}
                     class="explorer-breadcrumb-link explorer-link" 
                     href="#"
-                    title={this.collection.getDefaultLabel()}>
-                    {this.collection.getDefaultLabel()}
+                    title={this.collection.getDefaultLabel() || 'no label'}>
+                    {this.collection.getDefaultLabel() || 'no label'}
                 </a>
             </div>
 		)

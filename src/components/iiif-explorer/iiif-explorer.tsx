@@ -135,7 +135,7 @@ export class IIIFExplorer {
 					<hr/>
                     <div class="items">
 					{
-						this.data.current.members.map((item) => 	
+						this.data.current.members.map((item) => 
 							<iiif-explorer-item item={item} selected={this._selected === item}></iiif-explorer-item>
 						)
 					}

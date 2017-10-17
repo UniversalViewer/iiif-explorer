@@ -32,8 +32,8 @@ export class IIIFExplorerItem {
 
 		return (
 			<div class={divClasses}>
-				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.item.getDefaultLabel()}>
-					{this.item.getDefaultLabel()}
+				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.item.getDefaultLabel() || 'no label'}>
+					{this.item.getDefaultLabel() || 'no label'}
 				</a>
 			</div>
 		)
