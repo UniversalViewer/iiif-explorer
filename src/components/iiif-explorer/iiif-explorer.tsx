@@ -25,15 +25,9 @@ export class IIIFExplorer {
 
 	componentWillLoad() {
 
-		Manifold.loadManifest({
-			iiifResourceUri: this.manifest,
-			collectionIndex: 0,
-			manifestIndex: 0,
-			sequenceIndex: 0,
-			canvasIndex: 0
-        } as Manifold.IManifoldOptions).then((helper) => {
+		manifesto.loadManifest(this.manifest).then((data) => {
 
-			const root: Manifesto.IIIIFResource = helper.iiifResource;
+			const root: Manifesto.IIIIFResource = manifesto.create(data);
 			
 			if (root.getProperty('within')) {
                 // if the collection in within another, get the parents

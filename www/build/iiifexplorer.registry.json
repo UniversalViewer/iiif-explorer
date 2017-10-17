@@ -3,13 +3,18 @@
   "components": [
     [
       "IIIF-EXPLORER",
-      "pdoylirx",
+      "qbek1kib",
       {
-        "$": "2nbrirmj"
+        "$": "9kqelgkq"
       },
       [
         [
           "manifest",
+          1
+        ],
+        [
+          "upLevelEnabled",
+          1,
           1
         ]
       ],
@@ -26,16 +31,16 @@
     ],
     [
       "IIIF-EXPLORER-BREADCRUMB",
-      "hoddpwtr",
+      "qbek1kib",
       {
-        "$": "vqqekv6w"
+        "$": "9kqelgkq"
       }
     ],
     [
       "IIIF-EXPLORER-ITEM",
-      "pdoylirx",
+      "qbek1kib",
       {
-        "$": "2nbrirmj"
+        "$": "9kqelgkq"
       },
       [
         [
