@@ -1,3 +1,2 @@
-# iiif-explorer-component-stencil
+# iiif-explorer
 
-https://edsilv.github.io/iiif-explorer-component-stencil/www/
