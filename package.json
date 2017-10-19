@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@stencil/core": "0.0.6-0",
-    "manifesto.js": "viewdir/manifesto"
+    "manifesto.js": "github:iiif-commons/manifesto"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
@@ -26,12 +26,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-starter.git"
+    "url": "git+https://github.com/iiif-commons/iiif-explorer.git"
   },
-  "author": "Ionic Team",
+  "author": "@edsilv",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ionic-team/stencil"
+    "url": "https://github.com/iiif-commons/iiif-explorer"
   },
-  "homepage": "https://github.com/ionic-team/stencil"
+  "homepage": "https://github.com/iiif-commons/iiif-explorer",
+  "keywords": [
+    "iiif"
+  ]
 }
