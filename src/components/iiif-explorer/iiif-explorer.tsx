@@ -24,11 +24,7 @@ export class IIIFExplorer {
 
 	componentWillLoad() {
 
-		console.log("component will load");
-
 		manifesto.loadManifest(this.manifest).then((data) => {
-
-			console.log('loaded', data);
 
 			const root: Manifesto.IIIIFResource = manifesto.create(data);
 			
@@ -126,8 +122,6 @@ export class IIIFExplorer {
 		if (!this.data) {
 			return (<span>loading...</span>)
 		} else {
-
-			console.log('render', this.data);
 
 			return ( 
 				<div>
