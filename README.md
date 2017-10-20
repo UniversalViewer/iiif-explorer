@@ -18,4 +18,4 @@ Usage:
         });
     </script>
 
-[Demo (codepen)](https://codepen.io/pen/)
+[Demo (codepen)](https://codepen.io/aeschylus/pen/Qqoxvv)
