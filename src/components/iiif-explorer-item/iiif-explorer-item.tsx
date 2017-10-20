@@ -30,8 +30,6 @@ export class IIIFExplorerItem {
 			}
 		);
 
-		console.log('render item', this.item);
-
 		return (
 			
 			<div class={divClasses}>
