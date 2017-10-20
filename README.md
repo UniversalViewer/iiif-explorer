@@ -18,3 +18,4 @@ Usage:
         });
     </script>
 
+[Demo (codepen)](https://codepen.io/pen/)
