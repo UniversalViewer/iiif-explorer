@@ -30,7 +30,10 @@ export class IIIFExplorerItem {
 			}
 		);
 
+		console.log('render item', this.item);
+
 		return (
+			
 			<div class={divClasses}>
 				<a onClick={() => this._itemSelectedHandler()} class={aClasses} title={this.item.getDefaultLabel() || 'no label'}>
 					{this.item.getDefaultLabel() || 'no label'}
