@@ -2,4 +2,4 @@
 
 See [StencilJS docs](https://stenciljs.com/)
 
-[Demo (codepen)](https://codepen.io/aeschylus/pen/Qqoxvv)
+Demo: https://iiif-commons.github.io/iiif-explorer/www/
