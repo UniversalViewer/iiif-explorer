@@ -29,10 +29,19 @@
             document.addEventListener('onUpLevel', (evt) => {
                 console.log('up level:', evt.detail.getDefaultLabel());
             });
+
+            const iiifExplorer = document.querySelector('iiif-explorer');
+            const resetBtn = document.getElementById('reset');
+
+            resetBtn.onclick = () => {
+                iiifExplorer.reset();
+            }
         });
     </script>
 
     <iiif-explorer manifest="https://cdn.rawgit.com/ryanfb/iiif-universe/gh-pages/iiif-universe.json"></iiif-explorer>
+
+    <button id="reset">Reset</button>
 
 </body>
 </html>
