@@ -1,6 +1,6 @@
 {
   "name": "iiif-explorer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "IIIF Explorer Component",
   "main": "dist/collection/index.js",
   "types": "dist/collection/index.d.ts",
