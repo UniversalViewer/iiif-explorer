@@ -21,6 +21,7 @@ export class IIIFExplorer {
 
 	@Event() onSelectManifest: EventEmitter;
 	@Event() onSelectCollection: EventEmitter;
+	@Event() onUpLevel: EventEmitter;
 
 	componentWillLoad() {
 
@@ -163,5 +164,6 @@ export class IIIFExplorer {
 	breadcrumbSelected(event: CustomEvent) {
 		const item: Manifesto.Collection = event.detail;
 		this._gotoBreadcrumb(item);
+		this.onUpLevel.emit(item);
 	}
 }

@@ -19,11 +19,15 @@
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             document.addEventListener('onSelectManifest', (evt) => {
-                alert(evt.detail.getDefaultLabel() || 'no label');
+                console.log('select manifest:', evt.detail.getDefaultLabel() || 'no label');
             });
 
             document.addEventListener('onSelectCollection', (evt) => {
-                //alert(evt.detail.getDefaultLabel());
+                console.log('select collection:', evt.detail.getDefaultLabel());
+            });
+
+            document.addEventListener('onUpLevel', (evt) => {
+                console.log('up level:', evt.detail.getDefaultLabel());
             });
         });
     </script>
@@ -33,11 +37,10 @@
 
   <script>
     if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-      // auto-unregister service worker during dev mode
-      navigator.serviceWorker.ready.then(registration => {
-        registration.unregister().then(() => {
-          location.reload(true);
-        });
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('service worker registered', reg))
+          .catch(err => console.log('service worker error', err));
       });
     }
   </script>
