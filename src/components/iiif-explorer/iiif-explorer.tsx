@@ -9,9 +9,9 @@ import { IIIFExplorerData } from '../../IIIFExplorerData';
 })
 export class IIIFExplorer {
 
-	private _selected: Manifesto.IManifest | null;
-	private _current: Manifesto.ICollection;
-	private _parents: Manifesto.ICollection[] = [];
+	private _currentManifest: Manifesto.IManifest | null;
+	private _currentCollection: Manifesto.ICollection;
+	private _parentCollections: Manifesto.ICollection[] = [];
 
 	@Prop() manifest: string;
 	//@Prop() breadcrumbsEnabled: boolean = true;
@@ -32,7 +32,7 @@ export class IIIFExplorer {
 			if (root.getProperty('within')) {
                 // if the collection in within another, get the parents
                 this._followWithin(root).then((parents: Manifesto.ICollection[]) => {
-                    this._parents = parents;
+                    this._parentCollections = parents;
                     let start = parents.pop();
                     while (start && !start.isCollection()) {
                         start = parents.pop();
@@ -44,7 +44,7 @@ export class IIIFExplorer {
 			if (root.isCollection()) {
                 this._switchToFolder(root as Manifesto.ICollection);
             } else {
-                this._selected = root as Manifesto.IManifest;
+                this._currentManifest = root as Manifesto.IManifest;
             }
 
         }).catch(function(e) {
@@ -54,9 +54,10 @@ export class IIIFExplorer {
 	}
 
 	private _gotoBreadcrumb(node: Manifesto.ICollection): void {
-		let index: number = this._parents.indexOf(node);
-		this._current = this._parents[index];
-		this._parents = this._parents.slice(0, index + 1);
+		let index: number = this._parentCollections.indexOf(node);
+		this._currentCollection = this._parentCollections[index];
+		this._parentCollections = this._parentCollections.slice(0, index + 1);
+		this._currentManifest = null;
 		this._updateState();
 	}
 
@@ -75,13 +76,14 @@ export class IIIFExplorer {
 		return bType.indexOf('collection') - aType.indexOf('collection');
 	}
 
-	private _switchToFolder(node: Manifesto.ICollection): void {
-		if (!node.isLoaded) {
-			node.load().then(this._switchToFolder.bind(this));
+	private _switchToFolder(collection: Manifesto.ICollection): void {
+		if (!collection.isLoaded) {
+			collection.load().then(this._switchToFolder.bind(this));
 		} else {
-			node.members.sort(this._sortCollectionsFirst);
-			this._parents.push(node);
-			this._current = node;
+			collection.members.sort(this._sortCollectionsFirst);
+			this._parentCollections.push(collection);
+			this._currentCollection = collection;
+			this._currentManifest = null;
 			this._updateState();
 		}
 	}
@@ -111,9 +113,9 @@ export class IIIFExplorer {
 	private _updateState(): void {
 
 		this.data = { 
-			parents: this._parents, 
-			current: this._current, 
-			selected: this._selected 
+			parents: this._parentCollections, 
+			current: this._currentCollection, 
+			selected: this._currentManifest 
 		};
 
 	}
@@ -137,7 +139,7 @@ export class IIIFExplorer {
                     <div class="items">
 					{
 						this.data.current.members.map((item) => 
-							<iiif-explorer-item item={item} selected={this._selected === item}></iiif-explorer-item>
+							<iiif-explorer-item item={item} selected={this._currentManifest === item}></iiif-explorer-item>
 						)
 					}
 					</div>
@@ -155,7 +157,7 @@ export class IIIFExplorer {
 			this._switchToFolder(item as Manifesto.Collection);
 			this.onSelectCollection.emit(item);
 		} else {
-			this._selected = item as Manifesto.IManifest;
+			this._currentManifest = item as Manifesto.IManifest;
 			this.onSelectManifest.emit(item);
 		}
 	}
