@@ -18,19 +18,21 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            document.addEventListener('onSelectManifest', (evt) => {
+
+            const iiifExplorer = document.querySelector('iiif-explorer');
+
+            iiifExplorer.addEventListener('onSelectManifest', function(evt) {
                 console.log('select manifest:', evt.detail.getDefaultLabel() || 'no label');
             });
 
-            document.addEventListener('onSelectCollection', (evt) => {
-                console.log('select collection:', evt.detail.getDefaultLabel());
+            iiifExplorer.addEventListener('onSelectCollection', function(evt) {
+                console.log('select collection:', evt.detail.getDefaultLabel() || 'no label');
             });
 
-            document.addEventListener('onUpLevel', (evt) => {
-                console.log('up level:', evt.detail.getDefaultLabel());
+            iiifExplorer.addEventListener('onUpLevel', function(evt) {
+                console.log('up level:', evt.detail.getDefaultLabel() || 'no label');
             });
 
-            const iiifExplorer = document.querySelector('iiif-explorer');
             const resetBtn = document.getElementById('reset');
 
             resetBtn.onclick = () => {
@@ -48,10 +50,11 @@
 
   <script>
     if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('service worker registered', reg))
-          .catch(err => console.log('service worker error', err));
+      // auto-unregister service worker during dev mode
+      navigator.serviceWorker.ready.then(registration => {
+        registration.unregister().then(() => {
+          location.reload(true);
+        });
       });
     }
   </script>

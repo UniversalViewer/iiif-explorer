@@ -16,7 +16,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@stencil/core": "0.0.6-0",
+    "@stencil/core": "0.0.7",
     "manifesto.js": "github:iiif-commons/manifesto"
   },
   "devDependencies": {
