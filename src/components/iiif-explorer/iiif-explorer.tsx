@@ -1,4 +1,4 @@
-/// <reference path="../../../node_modules/manifesto.js/dist/manifesto.d.ts" />
+/// <reference types="manifesto.js" />
 
 import { Component, Prop, State, Listen, Event, EventEmitter, Method } from '@stencil/core';
 import { IIIFExplorerData } from '../../IIIFExplorerData';

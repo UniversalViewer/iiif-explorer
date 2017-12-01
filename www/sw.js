@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v2.1.0.js');
+importScripts('workbox-sw.prod.v2.1.2.js');
 
 /**
  * DO NOT EDIT THE FILE MANIFEST ENTRY
@@ -20,35 +20,35 @@ importScripts('workbox-sw.prod.v2.1.0.js');
 const fileManifest = [
   {
     "url": "build/iiifexplorer.js",
-    "revision": "dea75bde308e1a19b536eb64d95ec608"
+    "revision": "adf9cc333edbfca1571cc1f188c43ae4"
   },
   {
-    "url": "build/iiifexplorer.registry.json",
-    "revision": "ab74cdb5985fb93534438fe5a4755549"
+    "url": "build/iiifexplorer/7zytydlm.js",
+    "revision": "7a2bfa2a2e9eb333b2390085afe498cf"
   },
   {
-    "url": "build/iiifexplorer/9kqelgkq.css",
-    "revision": "de2f45df81119d0b64db7ffde7a05c76"
+    "url": "build/iiifexplorer/iiifexplorer.gkk0soev.js",
+    "revision": "8d727345e96e8db3aa573f451f33df87"
   },
   {
-    "url": "build/iiifexplorer/fmptirta.js",
-    "revision": "20e7b8603cc564cc37f0624920994194"
+    "url": "build/iiifexplorer/iiifexplorer.registry.json",
+    "revision": "bfd33d171aaea1a9d1bb74087398aadb"
   },
   {
-    "url": "build/iiifexplorer/iiifexplorer.ckjjew2b.js",
-    "revision": "a71095d12de49eea1089dbef82ecda89"
-  },
-  {
-    "url": "build/iiifexplorer/iiifexplorer.qwfigcny.pf.js",
-    "revision": "1e7f572eec03f8f0459e94ed981ac9f2"
+    "url": "build/iiifexplorer/iiifexplorer.vcke74st.js",
+    "revision": "7b553c55f7d0a74aead68ab6cff19a92"
   },
   {
     "url": "index.html",
-    "revision": "c3f1c839a6093cc2d3896adc617e1774"
+    "revision": "53c16721f5724801455c2ab6a3985576"
   },
   {
     "url": "workbox-sw.prod.v2.0.3.js",
     "revision": "60b4da760c6a02cbbf5efc80c4da7090"
+  },
+  {
+    "url": "workbox-sw.prod.v2.1.0.js",
+    "revision": "e5f207838d7fd9c81835d5705a73cfa2"
   }
 ];
 
