@@ -3,7 +3,7 @@
   "components": [
     [
       "iiif-explorer",
-      "7zytydlm",
+      "iiif-explorer",
       1,
       [
         [
@@ -42,7 +42,7 @@
     ],
     [
       "iiif-explorer-breadcrumb",
-      "7zytydlm",
+      "iiif-explorer",
       1,
       [
         [
@@ -53,7 +53,7 @@
     ],
     [
       "iiif-explorer-item",
-      "7zytydlm",
+      "iiif-explorer",
       1,
       [
         [
@@ -70,6 +70,6 @@
     ]
   ],
   "loader": "../iiifexplorer.js",
-  "core": "iiifexplorer.vcke74st.js",
-  "corePolyfilled": "iiifexplorer.gkk0soev.js"
+  "core": "iiifexplorer.core.js",
+  "corePolyfilled": "iiifexplorer.core.pf.js"
 }

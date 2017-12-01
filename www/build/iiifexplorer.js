@@ -1,2 +1,34 @@
 /*! Built with http://stenciljs.com */
-!function(e,t,i,r,l,s,c,n,o){"use strict";for((e[i]=e[i]||{}).components=c=c||[],(o=c.filter(function(e){return e[2]}).map(function(e){return e[0]})).length&&((n=t.createElement("style")).innerHTML=o.join()+"{visibility:hidden}",n.setAttribute("data-visibility",""),t.head.insertBefore(n,t.head.firstChild)),i=i.toLowerCase(),o=(n=t.scripts).length-1;o>=0;o--)if(n[o].src&&n[o].src.split("/").pop()===i+".js"){r=n[o].src.replace(i+".js",i+"/");break}(n=t.createElement("script")).src=r+(e.customElements&&e.fetch?l:"iiifexplorer.gkk0soev.js"),n.setAttribute("data-path",r),n.setAttribute("data-core",l),t.head.appendChild(n)}(window,document,"iiifexplorer","/build/iiifexplorer/","iiifexplorer.vcke74st.js",0,[["iiif-explorer","7zytydlm",1,[["data",5],["manifest",1,1,2],["reset",6],["upLevelEnabled",1,1,3]],0,0,[["onSelectBreadcrumb","breadcrumbSelected"],["onSelectItem","itemSelected"]]],["iiif-explorer-breadcrumb","7zytydlm",1,[["collection",1]]],["iiif-explorer-item","7zytydlm",1,[["item",1],["selected",1,1,3]]]]);
+(function (window, document, appNamespace, publicPath, appCore, appCorePolyfilled, components, x, i) {
+    'use strict';
+    // create global namespace if it doesn't already exist
+    (window[appNamespace] = window[appNamespace] || {}).components = components = components || [];
+    // auto hide components until they been fully hydrated
+    // reusing the "x" and "i" variables from the args for funzies
+    // note: filter and map must stay es5 and must not use arrow functions
+    i = components.filter(function (c) { return c[2]; }).map(function (c) { return c[0]; });
+    if (i.length) {
+        x = document.createElement('style');
+        x.innerHTML = i.join() + '{visibility:hidden}';
+        x.setAttribute('data-visibility', '');
+        document.head.insertBefore(x, document.head.firstChild);
+    }
+    // get this current script
+    appNamespace = appNamespace.toLowerCase();
+    x = document.scripts;
+    for (i = x.length - 1; i >= 0; i--) {
+        if (x[i].src && x[i].src.split('/').pop() === appNamespace + '.js') {
+            publicPath = x[i].src.replace(appNamespace + '.js', appNamespace + '/');
+            break;
+        }
+    }
+    // request the core this browser needs
+    // test for native support of custom elements and fetch
+    // if either of those are not supported, then use the core w/ polyfills
+    // also check if the page was build with ssr or not
+    x = document.createElement('script');
+    x.src = publicPath + ((window.customElements && window.fetch) ? appCore : appCorePolyfilled);
+    x.setAttribute('data-path', publicPath);
+    x.setAttribute('data-core', appCore);
+    document.head.appendChild(x);
+})(window, document, "iiifexplorer","/build/iiifexplorer/","iiifexplorer.core.js","iiifexplorer.core.pf.js",[["iiif-explorer","iiif-explorer",1,[["data",5],["manifest",1,1,2],["reset",6],["upLevelEnabled",1,1,3]],0,0,[["onSelectBreadcrumb","breadcrumbSelected"],["onSelectItem","itemSelected"]]],["iiif-explorer-breadcrumb","iiif-explorer",1,[["collection",1]]],["iiif-explorer-item","iiif-explorer",1,[["item",1],["selected",1,1,3]]]]);
