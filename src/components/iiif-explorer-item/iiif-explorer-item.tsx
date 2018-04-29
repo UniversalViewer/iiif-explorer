@@ -3,7 +3,7 @@ import classNames  from 'classnames';
 
 @Component({
 	tag: 'iiif-explorer-item',
-	styleUrl: 'iiif-explorer-item.scss'
+	styleUrl: 'iiif-explorer-item.css'
 })
 export class IIIFExplorerItem {
 

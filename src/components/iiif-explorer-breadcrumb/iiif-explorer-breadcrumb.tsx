@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
 	tag: 'iiif-explorer-breadcrumb',
-	styleUrl: 'iiif-explorer-breadcrumb.scss'
+	styleUrl: 'iiif-explorer-breadcrumb.css'
 })
 export class IIIFExplorerBreadcrumb {
 

@@ -4,96 +4,132 @@
  * and imports for stencil collections that might be configured in your stencil.config.js file
  */
 
-import { IIIFExplorerBreadcrumb as IiifExplorerBreadcrumb } from './components/iiif-explorer-breadcrumb/iiif-explorer-breadcrumb';
+import '@stencil/core';
 
-interface HTMLIiifExplorerBreadcrumbElement extends IiifExplorerBreadcrumb, HTMLElement {
-}
-declare var HTMLIiifExplorerBreadcrumbElement: {
-  prototype: HTMLIiifExplorerBreadcrumbElement;
-  new (): HTMLIiifExplorerBreadcrumbElement;
-};
 declare global {
+  namespace JSX {
+    interface Element {}
+    export interface IntrinsicElements {}
+  }
+  namespace JSXElements {}
+
+  interface HTMLStencilElement extends HTMLElement {
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
+
+    forceUpdate(): void;
+  }
+
+  interface HTMLAttributes {}
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface IiifExplorerBreadcrumb {
+      'collection': Manifesto.ICollection;
+    }
+  }
+
+  interface HTMLIiifExplorerBreadcrumbElement extends StencilComponents.IiifExplorerBreadcrumb, HTMLStencilElement {}
+
+  var HTMLIiifExplorerBreadcrumbElement: {
+    prototype: HTMLIiifExplorerBreadcrumbElement;
+    new (): HTMLIiifExplorerBreadcrumbElement;
+  };
   interface HTMLElementTagNameMap {
-      "iiif-explorer-breadcrumb": HTMLIiifExplorerBreadcrumbElement;
+    'iiif-explorer-breadcrumb': HTMLIiifExplorerBreadcrumbElement;
   }
   interface ElementTagNameMap {
-      "iiif-explorer-breadcrumb": HTMLIiifExplorerBreadcrumbElement;
+    'iiif-explorer-breadcrumb': HTMLIiifExplorerBreadcrumbElement;
   }
   namespace JSX {
-      interface IntrinsicElements {
-          "iiif-explorer-breadcrumb": JSXElements.IiifExplorerBreadcrumbAttributes;
-      }
+    interface IntrinsicElements {
+      'iiif-explorer-breadcrumb': JSXElements.IiifExplorerBreadcrumbAttributes;
+    }
   }
   namespace JSXElements {
-      export interface IiifExplorerBreadcrumbAttributes extends HTMLAttributes {
-          mode?: string,
-          color?: string,
-        
-          collection?: any
-      }
+    export interface IiifExplorerBreadcrumbAttributes extends HTMLAttributes {
+      'collection'?: Manifesto.ICollection;
+      'onOnSelectBreadcrumb'?: (event: CustomEvent) => void;
+    }
   }
 }
 
-import { IIIFExplorerItem as IiifExplorerItem } from './components/iiif-explorer-item/iiif-explorer-item';
 
-interface HTMLIiifExplorerItemElement extends IiifExplorerItem, HTMLElement {
-}
-declare var HTMLIiifExplorerItemElement: {
-  prototype: HTMLIiifExplorerItemElement;
-  new (): HTMLIiifExplorerItemElement;
-};
 declare global {
+
+  namespace StencilComponents {
+    interface IiifExplorerItem {
+      'item': Manifesto.IIIIFResource;
+      'selected': boolean;
+    }
+  }
+
+  interface HTMLIiifExplorerItemElement extends StencilComponents.IiifExplorerItem, HTMLStencilElement {}
+
+  var HTMLIiifExplorerItemElement: {
+    prototype: HTMLIiifExplorerItemElement;
+    new (): HTMLIiifExplorerItemElement;
+  };
   interface HTMLElementTagNameMap {
-      "iiif-explorer-item": HTMLIiifExplorerItemElement;
+    'iiif-explorer-item': HTMLIiifExplorerItemElement;
   }
   interface ElementTagNameMap {
-      "iiif-explorer-item": HTMLIiifExplorerItemElement;
+    'iiif-explorer-item': HTMLIiifExplorerItemElement;
   }
   namespace JSX {
-      interface IntrinsicElements {
-          "iiif-explorer-item": JSXElements.IiifExplorerItemAttributes;
-      }
+    interface IntrinsicElements {
+      'iiif-explorer-item': JSXElements.IiifExplorerItemAttributes;
+    }
   }
   namespace JSXElements {
-      export interface IiifExplorerItemAttributes extends HTMLAttributes {
-          mode?: string,
-          color?: string,
-        
-          item?: any,
-          selected?: boolean
-      }
+    export interface IiifExplorerItemAttributes extends HTMLAttributes {
+      'item'?: Manifesto.IIIIFResource;
+      'onOnSelectItem'?: (event: CustomEvent) => void;
+      'selected'?: boolean;
+    }
   }
 }
 
-import { IIIFExplorer as IiifExplorer } from './components/iiif-explorer/iiif-explorer';
 
-interface HTMLIiifExplorerElement extends IiifExplorer, HTMLElement {
-}
-declare var HTMLIiifExplorerElement: {
-  prototype: HTMLIiifExplorerElement;
-  new (): HTMLIiifExplorerElement;
-};
 declare global {
+
+  namespace StencilComponents {
+    interface IiifExplorer {
+      'manifest': string;
+      'reset': () => void;
+      'upLevelEnabled': boolean;
+    }
+  }
+
+  interface HTMLIiifExplorerElement extends StencilComponents.IiifExplorer, HTMLStencilElement {}
+
+  var HTMLIiifExplorerElement: {
+    prototype: HTMLIiifExplorerElement;
+    new (): HTMLIiifExplorerElement;
+  };
   interface HTMLElementTagNameMap {
-      "iiif-explorer": HTMLIiifExplorerElement;
+    'iiif-explorer': HTMLIiifExplorerElement;
   }
   interface ElementTagNameMap {
-      "iiif-explorer": HTMLIiifExplorerElement;
+    'iiif-explorer': HTMLIiifExplorerElement;
   }
   namespace JSX {
-      interface IntrinsicElements {
-          "iiif-explorer": JSXElements.IiifExplorerAttributes;
-      }
+    interface IntrinsicElements {
+      'iiif-explorer': JSXElements.IiifExplorerAttributes;
+    }
   }
   namespace JSXElements {
-      export interface IiifExplorerAttributes extends HTMLAttributes {
-          mode?: string,
-          color?: string,
-        
-          reset?: any,
-          manifest?: string,
-          upLevelEnabled?: boolean
-      }
+    export interface IiifExplorerAttributes extends HTMLAttributes {
+      'manifest'?: string;
+      'onOnSelectCollection'?: (event: CustomEvent) => void;
+      'onOnSelectManifest'?: (event: CustomEvent) => void;
+      'onOnUpLevel'?: (event: CustomEvent) => void;
+      'upLevelEnabled'?: boolean;
+    }
   }
 }
 
+declare global { namespace JSX { interface StencilJSX {} } }

@@ -5,7 +5,7 @@ import { IIIFExplorerData } from '../../IIIFExplorerData';
 
 @Component({
 	tag: 'iiif-explorer',
-	styleUrl: 'iiif-explorer.scss'
+	styleUrl: 'iiif-explorer.css'
 })
 export class IIIFExplorer {
 
@@ -88,7 +88,7 @@ export class IIIFExplorer {
 		if (!collection.isLoaded) {
 			collection.load().then(this._switchToFolder.bind(this));
 		} else {
-			collection.members.sort(this._sortCollectionsFirst);
+			collection.items.sort(this._sortCollectionsFirst);
 			this._parentCollections.push(collection);
 			this._selectedCollection = collection;
 			this._selectedManifest = null;
@@ -152,7 +152,7 @@ export class IIIFExplorer {
 					<hr/>
                     <div class="items">
 					{
-						this.data.selectedCollection.members.map((item) => 
+						this.data.selectedCollection.items.map((item) => 
 							<iiif-explorer-item item={item} selected={this._selectedManifest === item}></iiif-explorer-item>
 						)
 					}
