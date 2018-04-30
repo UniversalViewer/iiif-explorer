@@ -1,5 +1,10 @@
 iiif-explorer {
-	line-height: 1.2;
+	font-family: sans-serif;
+}
+
+iiif-explorer a {
+    display: block;
+    padding: 4px 0 4px 0;
 }
 
 iiif-explorer .explorer-link {
@@ -14,7 +19,7 @@ iiif-explorer .explorer-link:hover {
 iiif-explorer .explorer-breadcrumb,
 iiif-explorer .explorer-folder,
 iiif-explorer .explorer-resource {
-  	padding-left: 20px;
+  	padding-left: 22px;
   	background-position: 1px center;
   	background-repeat: no-repeat;
 }
