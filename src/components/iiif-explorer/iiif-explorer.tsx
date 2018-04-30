@@ -9,7 +9,7 @@ import { IIIFExplorerData } from '../../IIIFExplorerData';
 })
 export class IIIFExplorer {
 
-	private _selectedManifest: Manifesto.IManifest | null;
+	private _selectedManifest: string | null;
 	private _selectedCollection: Manifesto.ICollection | null;
 	private _parentCollections: Manifesto.ICollection[] = [];
 
@@ -52,7 +52,7 @@ export class IIIFExplorer {
 			if (root.isCollection()) {
 				this._switchToFolder(root as Manifesto.ICollection);
 			} else {
-				this._selectedManifest = root as Manifesto.IManifest;
+				this._selectedManifest = root.id;
 			}
 
 		}).catch(function(e) {
@@ -153,7 +153,7 @@ export class IIIFExplorer {
                     <div class="items">
 					{
 						this.data.selectedCollection.items.map((item) => 
-							<iiif-explorer-item item={item} selected={this._selectedManifest === item}></iiif-explorer-item>
+							<iiif-explorer-item item={item} selected={this._selectedManifest === item.id}></iiif-explorer-item>
 						)
 					}
 					</div>
@@ -171,8 +171,9 @@ export class IIIFExplorer {
 			this._switchToFolder(item as Manifesto.Collection);
 			this.onSelectCollection.emit(item);
 		} else {
-			this._selectedManifest = item as Manifesto.IManifest;
+			this._selectedManifest = item.id;
 			this.onSelectManifest.emit(item);
+			this._updateState();
 		}
 	}
 

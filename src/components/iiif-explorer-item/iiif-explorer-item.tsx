@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Prop } from '@stencil/core';
-import classNames  from 'classnames';
+import classNames from 'classnames';
 
 @Component({
 	tag: 'iiif-explorer-item',

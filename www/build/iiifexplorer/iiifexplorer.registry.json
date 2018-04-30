@@ -7,13 +7,13 @@
   "corePolyfilled": "iiifexplorer.beencfbq.js",
   "components": {
     "iiif-explorer": {
-      "$": "btjlr1iw"
+      "$": "qezhwhri"
     },
     "iiif-explorer-breadcrumb": {
-      "$": "btjlr1iw"
+      "$": "qezhwhri"
     },
     "iiif-explorer-item": {
-      "$": "btjlr1iw"
+      "$": "qezhwhri"
     }
   }
 }
