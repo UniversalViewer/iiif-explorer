@@ -9,7 +9,8 @@ import { IIIFExplorerData } from '../../IIIFExplorerData';
 })
 export class IIIFExplorer {
 
-	private _selectedManifest: string | null;
+	private _manifest: Manifesto.IManifest | null;
+	private _selectedManifest: Manifesto.IManifest | null;
 	private _selectedCollection: Manifesto.ICollection | null;
 	private _parentCollections: Manifesto.ICollection[] = [];
 
@@ -29,12 +30,13 @@ export class IIIFExplorer {
 
 	private _reset(): void {
 
+		this._manifest = null;
 		this._selectedManifest = null;
 		this._selectedCollection = null;
 		this._parentCollections = [];
 
 		manifesto.loadManifest(this.manifest).then((data) => {
-			
+
 			const root: Manifesto.IIIIFResource = manifesto.create(data);
 			
 			if (root.getProperty('within')) {
@@ -52,7 +54,8 @@ export class IIIFExplorer {
 			if (root.isCollection()) {
 				this._switchToFolder(root as Manifesto.ICollection);
 			} else {
-				this._selectedManifest = root.id;
+				this._manifest = root as Manifesto.IManifest;
+				this._updateState();
 			}
 
 		}).catch(function(e) {
@@ -121,6 +124,7 @@ export class IIIFExplorer {
 	private _updateState(): void {
 
 		this.data = { 
+			manifest: this._manifest,
 			parentCollections: this._parentCollections, 
 			selectedCollection: this._selectedCollection, 
 			selectedManifest: this._selectedManifest 
@@ -136,8 +140,19 @@ export class IIIFExplorer {
 
 	render() {
 
-		if (!this.data || !this.data.selectedCollection) {
+		if (!this.data) {
 			return (<span>loading...</span>)
+		} else if (this.data.manifest) {
+			// it's a manifest without a parent collection
+			return (
+				<div>
+					<div class="items">
+					{
+						<iiif-explorer-item item={this.data.manifest} selected={this.data.selectedManifest && this.data.selectedManifest.id === this._manifest.id}></iiif-explorer-item>
+					}
+					</div>
+				</div>
+			)
 		} else {
 
 			return ( 
@@ -153,7 +168,7 @@ export class IIIFExplorer {
                     <div class="items">
 					{
 						this.data.selectedCollection.items.map((item) => 
-							<iiif-explorer-item item={item} selected={this._selectedManifest === item.id}></iiif-explorer-item>
+							<iiif-explorer-item item={item} selected={this._selectedManifest && this._selectedManifest.id === item.id}></iiif-explorer-item>
 						)
 					}
 					</div>
@@ -171,7 +186,7 @@ export class IIIFExplorer {
 			this._switchToFolder(item as Manifesto.Collection);
 			this.onSelectCollection.emit(item);
 		} else {
-			this._selectedManifest = item.id;
+			this._selectedManifest = item as Manifesto.IManifest;
 			this.onSelectManifest.emit(item);
 			this._updateState();
 		}

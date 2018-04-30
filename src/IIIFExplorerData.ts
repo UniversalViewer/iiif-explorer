@@ -1,5 +1,6 @@
 export interface IIIFExplorerData {
-    selectedManifest: string | null;
-    selectedCollection: Manifesto.ICollection;
+    manifest: Manifesto.IManifest | null;
+    selectedManifest: Manifesto.IManifest | null;
+    selectedCollection: Manifesto.ICollection | null;
     parentCollections: Manifesto.ICollection[];
 }
