@@ -3,7 +3,7 @@
   "fsNamespace": "iiifexplorer",
   "loader": "../iiifexplorer.js",
   "global": "iiifexplorer.global.js",
-  "core": "iiifexplorer.4udivtno.js",
+  "core": "iiifexplorer.pmcc1ceg.js",
   "corePolyfilled": "iiifexplorer.beencfbq.js",
   "components": {
     "iiif-explorer": {
