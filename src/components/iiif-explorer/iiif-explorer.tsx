@@ -1,4 +1,4 @@
-import { Component, Prop, State, Listen, Event, EventEmitter, Method } from '@stencil/core';
+import { Component, Prop, State, Listen, Event, EventEmitter, Method, Watch } from '@stencil/core';
 import { IIIFExplorerData } from '../../IIIFExplorerData';
 
 @Component({
@@ -13,6 +13,10 @@ export class IIIFExplorer {
 	private _parentCollections: Manifesto.ICollection[] = [];
 
 	@Prop() manifest: string;
+	@Watch('manifest')
+	watchHandler() {
+		this._reset();
+	}
 	//@Prop() breadcrumbsEnabled: boolean = true;
 	@Prop() upLevelEnabled: boolean = true;
 
@@ -33,33 +37,36 @@ export class IIIFExplorer {
 		this._selectedCollection = null;
 		this._parentCollections = [];
 
-		manifesto.loadManifest(this.manifest).then((data) => {
-
-			const root: Manifesto.IIIIFResource = manifesto.create(data);
+		if (this.manifest) {
 			
-			if (root.getProperty('within')) {
-				// if the collection in within another, get the parents
-				this._followWithin(root).then((parents: Manifesto.ICollection[]) => {
-					this._parentCollections = parents;
-					let start = parents.pop();
-					while (start && !start.isCollection()) {
-						start = parents.pop();
-					}
-					this._switchToFolder(start as Manifesto.ICollection);
-				});
-			}
+			manifesto.loadManifest(this.manifest).then((data) => {
 
-			if (root.isCollection()) {
-				this._switchToFolder(root as Manifesto.ICollection);
-			} else {
-				this._manifest = root as Manifesto.IManifest;
-				this._updateState();
-			}
-
-		}).catch(function(e) {
-			console.error(e);
-			console.error('failed to load manifest');
-		});
+				const root: Manifesto.IIIIFResource = manifesto.create(data);
+				
+				if (root.getProperty('within')) {
+					// if the collection in within another, get the parents
+					this._followWithin(root).then((parents: Manifesto.ICollection[]) => {
+						this._parentCollections = parents;
+						let start = parents.pop();
+						while (start && !start.isCollection()) {
+							start = parents.pop();
+						}
+						this._switchToFolder(start as Manifesto.ICollection);
+					});
+				}
+	
+				if (root.isCollection()) {
+					this._switchToFolder(root as Manifesto.ICollection);
+				} else {
+					this._manifest = root as Manifesto.IManifest;
+					this._updateState();
+				}
+	
+			}).catch(function(e) {
+				console.error(e);
+				console.error('failed to load manifest');
+			});
+		}
 	}
 
 	private _gotoBreadcrumb(node: Manifesto.ICollection): void {
