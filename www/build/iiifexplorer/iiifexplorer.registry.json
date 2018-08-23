@@ -3,17 +3,17 @@
   "fsNamespace": "iiifexplorer",
   "loader": "../iiifexplorer.js",
   "global": "iiifexplorer.global.js",
-  "core": "iiifexplorer.u2zfbikz.js",
+  "core": "iiifexplorer.4wipotsl.js",
   "corePolyfilled": "iiifexplorer.dlgllref.js",
   "components": {
     "iiif-explorer": {
-      "$": "zzxhfn26"
+      "$": "gamtyjbr"
     },
     "iiif-explorer-breadcrumb": {
-      "$": "zzxhfn26"
+      "$": "gamtyjbr"
     },
     "iiif-explorer-item": {
-      "$": "zzxhfn26"
+      "$": "gamtyjbr"
     }
   }
 }

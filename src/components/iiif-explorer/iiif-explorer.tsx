@@ -82,8 +82,8 @@ export class IIIFExplorer {
 		let bType = b.getIIIFResourceType().value;
 		if (aType === bType) {
 			// Alphabetical
-			let aLabel = Manifesto.TranslationCollection.getValue(a.getLabel());
-			let bLabel = Manifesto.TranslationCollection.getValue(b.getLabel());
+			let aLabel = Manifesto.LanguageMap.getValue(a.getLabel());
+			let bLabel = Manifesto.LanguageMap.getValue(b.getLabel());
 			if (aLabel && bLabel) {
 				return aLabel < bLabel ? -1 : 1;
 			}

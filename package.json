@@ -1,6 +1,6 @@
 {
   "name": "iiif-explorer",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "IIIF Explorer Component",
   "main": "dist/iiifexplorer.js",
   "types": "dist/types/components.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@stencil/core": "^0.7.27-4",
-    "manifesto.js": "^2.2.12"
+    "manifesto.js": "3.0.3"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
