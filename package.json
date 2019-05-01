@@ -15,7 +15,8 @@
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
-    "test.watch": "jest --watch --no-cache"
+    "test.watch": "jest --watch --no-cache",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@stencil/core": "^0.7.27-4",
