@@ -1,0 +1,15 @@
+iiif-explorer-item .explorer-folder {
+  cursor: pointer;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AsDDi0N6/AkhQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAARUlEQVQoz+2TMQ4AIAwCwfj/L+PU6KDFpKPeTA4WCACShDMkCQdDsgsvfiujJGWhfOxssSJHFDUUiRFlUfBFT4v67Q0cAw/iHBfP65QbAAAAAElFTkSuQmCC");
+}
+
+iiif-explorer-item .explorer-resource {
+  cursor: pointer;
+  background-position: left top;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AsDEA8dR038uwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAARklEQVQoz+2TMQ4AIAgDe8b/f7kubqARV72RhGsZQBFrD6dD29EFyLaAdK+pyAwJSb0imW1SerHJUlg+bcUXPS3i4mnT3QFl8RAdYwbtnAAAAABJRU5ErkJggg==");
+}
+
+iiif-explorer-item .selected {
+  background-color: #000;
+  color: #fff;
+}

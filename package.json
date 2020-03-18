@@ -15,14 +15,26 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "lint:all": "prettier --write \"./src/**/*.{js,jsx,json,css,ts,tsx}\" \"!./src/assets/* \"",
+    "build": "npm run lint:all && stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "devDependencies": {
-    "@stencil/core": "^1.8.8"
+    "@stencil/core": "^1.8.8",
+    "prettier": "1.18.2",
+    "prettier-check": "2.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "tslint": "^5.19.0",
+    "tslint-config-prettier": "1.18.0",
+    "typescript-tslint-plugin": "0.5.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^13.9.1",
+    "manifesto.js": "^4.0.3"
+  }
 }

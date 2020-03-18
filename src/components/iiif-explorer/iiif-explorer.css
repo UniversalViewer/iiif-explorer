@@ -1,0 +1,25 @@
+iiif-explorer {
+  font-family: sans-serif;
+}
+
+iiif-explorer a {
+  display: block;
+  padding: 4px 0 4px 0;
+}
+
+iiif-explorer .explorer-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+iiif-explorer .explorer-link:hover {
+  text-decoration: underline;
+}
+
+iiif-explorer .explorer-breadcrumb,
+iiif-explorer .explorer-folder,
+iiif-explorer .explorer-resource {
+  padding-left: 22px;
+  background-position: 1px center;
+  background-repeat: no-repeat;
+}
