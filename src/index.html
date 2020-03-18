@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>IIIF Explorer Component</title>
-  <script src="https://unpkg.com/manifesto.js/dist/client/manifesto.bundle.js"></script>
-  <script src="build/iiifexplorer.js"></script>
+  <script type="module" src="/build/iiif-explorer.esm.js"></script>
+  <script nomodule src="/build/iiif-explorer.js"></script>
 </head>
 <body>
 
@@ -26,11 +26,11 @@
                 console.log('up level:', evt.detail.getDefaultLabel() || 'no label');
             });
 
-            const resetBtn = document.getElementById('reset');
+            // const resetBtn = document.getElementById('reset');
 
-            resetBtn.onclick = () => {
-                iiifExplorer.reset();
-            }
+            // resetBtn.onclick = () => {
+            //     iiifExplorer.reset();
+            // }
         });
     </script>
 
@@ -43,11 +43,11 @@
     http://iiif-3d-manifests.netlify.com/collection/index.json (iiif 3d manifests)
     -->
 
-    <iiif-explorer manifest="http://iiif-3d-manifests.netlify.com/collection/index.json"></iiif-explorer>
+    <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif"></iiif-explorer>
 
-    <p>
+    <!-- <p>
         <button id="reset">Reset</button>
-    </p>
+    </p> -->
 
 </body>
 </html>

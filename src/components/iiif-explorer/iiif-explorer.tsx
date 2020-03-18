@@ -1,5 +1,6 @@
-import { Component, Prop, State, Listen, Event, EventEmitter, Method, Watch } from '@stencil/core';
-import { IIIFExplorerData } from '../../IIIFExplorerData';
+import { Component, h, Prop, State, Listen, Event, EventEmitter } from '@stencil/core';
+import { Manifest, Collection, LanguageMap, IIIFResource, Utils } from 'manifesto.js';
+import { IIIFResourceType } from '@iiif/vocabulary';
 
 @Component({
 	tag: 'iiif-explorer',
@@ -7,83 +8,96 @@ import { IIIFExplorerData } from '../../IIIFExplorerData';
 })
 export class IIIFExplorer {
 
-	private _manifest: Manifesto.IManifest | null;
-	private _selectedManifest: Manifesto.IManifest | null;
-	private _selectedCollection: Manifesto.ICollection | null;
-	private _parentCollections: Manifesto.ICollection[] = [];
+  @State() private _manifest: Manifest | null;
+	@State() private _selectedManifest: Manifest | null;
+	@State() private _selectedCollection: Collection | null;
+  @State() private _parentCollections: Collection[] = [];
+  @State() private _loaded: boolean;
 
-	@Prop() manifest: string;
-	@Watch('manifest')
-	watchHandler() {
-		this._reset();
-	}
+  @Prop() manifest: string;
+
 	//@Prop() breadcrumbsEnabled: boolean = true;
 	@Prop() upLevelEnabled: boolean = true;
 
-	@State() data: IIIFExplorerData = null;
+	@Event() selectManifest: EventEmitter;
+	@Event() selectCollection: EventEmitter;
+	@Event() upLevel: EventEmitter;
 
-	@Event() onSelectManifest: EventEmitter;
-	@Event() onSelectCollection: EventEmitter;
-	@Event() onUpLevel: EventEmitter;
-
-	componentWillLoad() {
-		this._reset();
-	}
-
-	private _reset(): void {
-
-		this._manifest = null;
-		this._selectedManifest = null;
-		this._selectedCollection = null;
-		this._parentCollections = [];
-
+	async componentWillLoad () {
 		if (this.manifest) {
-			
-			manifesto.loadManifest(this.manifest).then((data) => {
 
-				const root: Manifesto.IIIIFResource = manifesto.create(data);
-				
-				if (root.getProperty('within')) {
-					// if the collection in within another, get the parents
-					this._followWithin(root).then((parents: Manifesto.ICollection[]) => {
-						this._parentCollections = parents;
-						let start = parents.pop();
-						while (start && !start.isCollection()) {
-							start = parents.pop();
-						}
-						this._switchToFolder(start as Manifesto.ICollection);
-					});
-				}
-	
-				if (root.isCollection()) {
-					this._switchToFolder(root as Manifesto.ICollection);
-				} else {
-					this._manifest = root as Manifesto.IManifest;
-					this._updateState();
-				}
-	
-			}).catch(function(e) {
-				console.error(e);
-				console.error('failed to load manifest');
-			});
-		}
+			const data = await Utils.loadManifest(this.manifest);
+			const root: IIIFResource = Utils.parseManifest(data);
+
+      if (root.getProperty('within')) {
+        // if the collection is within another, get the parents
+        this._followWithin(root).then((parents: Collection[]) => {
+          this._parentCollections = parents;
+          let start = parents.pop();
+          while (start && !start.isCollection()) {
+            start = parents.pop();
+          }
+          this._switchToFolder(start as Collection);
+        });
+      }
+
+      if (root.isCollection()) {
+        this._switchToFolder(root as Collection);
+      } else {
+        this._manifest = root as Manifest;
+      }
+
+    }
 	}
 
-	private _gotoBreadcrumb(node: Manifesto.ICollection): void {
+	//private async _reset(): Promise<void> {
+
+		// this._manifest = null;
+		// this._selectedManifest = null;
+		// this._selectedCollection = null;
+    // this._parentCollections = [];
+    // this._loaded = false;
+
+		// if (this.manifest) {
+
+		// 	const data = await loadManifest(this.manifest);
+		// 	const root: IIIFResource = parseManifest(data);
+
+    //   if (root.getProperty('within')) {
+    //     // if the collection is within another, get the parents
+    //     this._followWithin(root).then((parents: Collection[]) => {
+    //       this._parentCollections = parents;
+    //       let start = parents.pop();
+    //       while (start && !start.isCollection()) {
+    //         start = parents.pop();
+    //       }
+    //       this._switchToFolder(start as Collection);
+    //     });
+    //   }
+
+    //   if (root.isCollection()) {
+    //     this._switchToFolder(root as Collection);
+    //   } else {
+    //     this._manifest = root as Manifest;
+    //   }
+
+    // }
+	//}
+
+	private _gotoBreadcrumb(node: Collection): void {
 		let index: number = this._parentCollections.indexOf(node);
 		this._selectedCollection = this._parentCollections[index];
 		this._parentCollections = this._parentCollections.slice(0, index + 1);
 		this._selectedManifest = null;
-		this._updateState();
 	}
 
-	private _sortCollectionsFirst(a: Manifesto.IIIIFResource, b: Manifesto.IIIIFResource): number {
-		let aType = a.getIIIFResourceType().value;
-		let bType = b.getIIIFResourceType().value;
+	private _sortCollectionsFirst(a: IIIFResource, b: IIIFResource): number {
+		let aType: IIIFResourceType = a.getIIIFResourceType();
+		let bType = b.getIIIFResourceType();
 		if (aType === bType) {
 			// Alphabetical
-			let aLabel = Manifesto.LanguageMap.getValue(a.getLabel());
-			let bLabel = Manifesto.LanguageMap.getValue(b.getLabel());
+			let aLabel = LanguageMap.getValue(a.getLabel());
+			let bLabel = LanguageMap.getValue(b.getLabel());
 			if (aLabel && bLabel) {
 				return aLabel < bLabel ? -1 : 1;
 			}
@@ -92,87 +106,72 @@ export class IIIFExplorer {
 		return bType.indexOf('collection') - aType.indexOf('collection');
 	}
 
-	private _switchToFolder(collection: Manifesto.ICollection): void {
+	private _switchToFolder(collection: Collection): void {
 		if (!collection.isLoaded) {
 			collection.load().then(this._switchToFolder.bind(this));
 		} else {
 			collection.items.sort(this._sortCollectionsFirst);
 			this._parentCollections.push(collection);
 			this._selectedCollection = collection;
-			this._selectedManifest = null;
-			this._updateState();
+      this._selectedManifest = null;
+      this._loaded = true;
 		}
 	}
-	
-	private _followWithin(node: Manifesto.IIIIFResource): Promise<Manifesto.IIIIFResource[]> {
-		return new Promise<any>((resolve, reject) => {
-			let url: any = node.getProperty('within');
-			if (Array.isArray(url)) { // TODO: Handle multiple within values
-				resolve([]);
-			}
 
-			Manifesto.Utils.loadResource(url)
-				.then((parent: any) => {
-				  	const parentManifest: Manifesto.IIIIFResource = manifesto.create(parent);
-				  	if (parentManifest.getProperty('within')) {
-					  	this._followWithin(parentManifest).then((array: Manifesto.IIIIFResource[]) => {
-						  	array.push(node);
-						  	resolve(array);
-					  	});
-				  	} else {
-					  	resolve([parentManifest, node]);
-				  	}
-				}).catch(reject);
-		});
+	private async _followWithin(node: IIIFResource): Promise<IIIFResource[]> {
+
+    let url: any = node.getProperty('within');
+
+    if (Array.isArray(url)) { // TODO: Handle multiple within values
+      return [];
+    }
+
+    const parent = await Utils.loadManifest(url);
+
+    const parentManifest: IIIFResource = Utils.parseManifest(parent);
+    if (parentManifest.getProperty('within')) {
+      this._followWithin(parentManifest).then((array: IIIFResource[]) => {
+        array.push(node);
+        return array;
+      });
+    }
+
+    return [parentManifest, node];
 	}
 
-	private _updateState(): void {
-
-		this.data = { 
-			manifest: this._manifest,
-			parentCollections: this._parentCollections, 
-			selectedCollection: this._selectedCollection, 
-			selectedManifest: this._selectedManifest 
-		};
-
-	}
-
-	@Method()
-	public reset(): void{
-		this._reset();
-		this._updateState();
-	}
+	// @Method()
+	// public reset(): void{
+	// 	this._reset();
+	// }
 
 	render() {
-
-		if (!this.data) {
+		if (!this._loaded) {
 			return (<span>loading...</span>)
-		} else if (this.data.manifest) {
+		} else if (this.manifest) {
 			// it's a manifest without a parent collection
 			return (
 				<div>
 					<div class="items">
 					{
-						<iiif-explorer-item item={this.data.manifest} selected={this.data.selectedManifest && this.data.selectedManifest.id === this._manifest.id}></iiif-explorer-item>
+						<iiif-explorer-item item={this.manifest} selected={this._selectedManifest && this._selectedManifest.id === this._manifest.id}></iiif-explorer-item>
 					}
 					</div>
 				</div>
 			)
 		} else {
-
-			return ( 
+			return (
 				<div>
 					<div class="breadcrumbs">
 					{
-						this.data.parentCollections.map((collection) => 
+						this._parentCollections.map((collection) =>
 							<iiif-explorer-breadcrumb collection={collection}></iiif-explorer-breadcrumb>
 						)
 					}
 					</div>
 					<hr/>
-                    <div class="items">
+          <div class="items">
 					{
-						this.data.selectedCollection.items.map((item) => 
+						this._selectedCollection.items.map((item) =>
 							<iiif-explorer-item item={item} selected={this._selectedManifest && this._selectedManifest.id === item.id}></iiif-explorer-item>
 						)
 					}
@@ -182,25 +181,24 @@ export class IIIFExplorer {
 		}
 	}
 
-	@Listen('onSelectItem')
+	@Listen('selectItem')
 	itemSelected(event: CustomEvent) {
 
-		const item: Manifesto.IIIIFResource = event.detail;
+		const item: IIIFResource = event.detail;
 
 		if (item.isCollection()) {
-			this._switchToFolder(item as Manifesto.Collection);
-			this.onSelectCollection.emit(item);
+			this._switchToFolder(item as Collection);
+			this.selectCollection.emit(item);
 		} else {
-			this._selectedManifest = item as Manifesto.IManifest;
-			this.onSelectManifest.emit(item);
-			this._updateState();
+			this._selectedManifest = item as Manifest;
+			this.selectManifest.emit(item);
 		}
 	}
 
-	@Listen('onSelectBreadcrumb')
+	@Listen('selectBreadcrumb')
 	breadcrumbSelected(event: CustomEvent) {
-		const item: Manifesto.Collection = event.detail;
+		const item: Collection = event.detail;
 		this._gotoBreadcrumb(item);
-		this.onUpLevel.emit(item);
+		this.upLevel.emit(item);
 	}
 }

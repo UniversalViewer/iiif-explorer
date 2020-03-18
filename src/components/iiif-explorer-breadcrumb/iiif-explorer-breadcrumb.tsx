@@ -1,4 +1,5 @@
-import { Component, Event, EventEmitter, Prop } from '@stencil/core';
+import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
+import { Collection } from 'manifesto.js';
 
 @Component({
 	tag: 'iiif-explorer-breadcrumb',
@@ -6,25 +7,25 @@ import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 })
 export class IIIFExplorerBreadcrumb {
 
-	@Prop() collection: Manifesto.ICollection;
+	@Prop() collection: Collection;
 
-	@Event() onSelectBreadcrumb: EventEmitter;
+	@Event() selectBreadcrumb: EventEmitter;
 
 	render() {
 
 		return (
 			<div class="explorer-breadcrumb explorer-item">
-                <a 	onClick={() => this._breadcrumbSelectedHandler()}
-                    class="explorer-breadcrumb-link explorer-link" 
-                    href="#"
-                    title={this.collection.getDefaultLabel() || 'no label'}>
-                    {this.collection.getDefaultLabel() || 'no label'}
-                </a>
-            </div>
+          <a 	onClick={() => this._breadcrumbSelectedHandler()}
+              class="explorer-breadcrumb-link explorer-link"
+              href="#"
+              title={this.collection.getDefaultLabel() || 'no label'}>
+              {this.collection.getDefaultLabel() || 'no label'}
+          </a>
+      </div>
 		)
 	}
 
 	private _breadcrumbSelectedHandler() {
-		this.onSelectBreadcrumb.emit(this.collection);
+		this.selectBreadcrumb.emit(this.collection);
 	}
 }
