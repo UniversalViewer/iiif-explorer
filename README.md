@@ -7,10 +7,10 @@ Built with [StencilJS](https://stenciljs.com/)
 ```
 <html>
 <head>
-    <script src="https://unpkg.com/iiif-explorer/dist/iiifexplorer.js"></script>
+    <script src="https://unpkg.com/iiif-explorer"></script>
 </head>
 <body>
-    <iiif-explorer manifest="https://edsilv.github.io/iiif-3d-manifests/collection/index.json"></iiif-explorer>
+    <iiif-explorer manifest="https://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer>
 </body>
 </html>
 ```
