@@ -1,6 +1,6 @@
 # iiif-explorer
 
-iiif-explorer.netlify.com
+[iiif-explorer.netlify.com](iiif-explorer.netlify.com)
 
 Built with [StencilJS](https://stenciljs.com/)
 
