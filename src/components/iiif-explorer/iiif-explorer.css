@@ -2,12 +2,6 @@ iiif-explorer {
   font-family: sans-serif;
 }
 
-/* iiif-explorer .breadcrumb,
-iiif-explorer .folder,
-iiif-explorer .file {
-  padding-left: 22px;
-} */
-
 ion-item {
   display: block;
 }

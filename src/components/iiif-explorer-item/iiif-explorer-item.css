@@ -1,14 +1,8 @@
-/*
-iiif-explorer-item {
-  display: block;
-} */
-
-/* iiif-explorer-item ion-label {
-  cursor: pointer;
-  padding: 4px 0 4px 0;
-} */
-
-/* iiif-explorer-item .selected {
-  background-color: grey;
+.selected {
+  --background: grey;
   color: #fff;
-} */
+}
+
+ion-label {
+  cursor: pointer;
+}

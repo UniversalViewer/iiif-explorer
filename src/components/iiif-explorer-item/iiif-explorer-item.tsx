@@ -15,23 +15,27 @@ export class IIIFExplorerItem {
 
   protected render() {
     const label: string = this.item.getDefaultLabel() || "no label";
-    return this.item && (
-      <ion-item
-        class={{
-          selected: this.selected,
-          "folder": this.item.isCollection(),
-          "file": this.item.isManifest()
-        }}
-      >
-        <ion-icon slot="start" name="document" />
-        <ion-label
-          onClick={() => this.selectItem.emit(this.item)}
-          title={label}>{label}</ion-label>
-      </ion-item>
+    return (
+      this.item && (
+        <ion-item
+          class={{
+            selected: this.selected,
+            folder: this.item.isCollection(),
+            file: this.item.isManifest()
+          }}
+        >
+          <ion-icon
+            slot="start"
+            src={this.item.isCollection() ? FolderIcon : FileIcon}
+          />
+          <ion-label
+            onClick={() => this.selectItem.emit(this.item)}
+            title={label}
+          >
+            {label}
+          </ion-label>
+        </ion-item>
+      )
     );
-
-    // src={
-    //   this.item.isCollection() ? FolderIcon : FileIcon
-    // }
   }
 }

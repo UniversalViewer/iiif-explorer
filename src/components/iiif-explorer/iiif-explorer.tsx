@@ -1,4 +1,5 @@
 import { IIIFResourceType } from "@iiif/vocabulary";
+import '@ionic/core';
 import {
   Component,
   Event,
@@ -132,26 +133,23 @@ export class IIIFExplorer {
       return (
         <ion-content>
           <ion-list class="breadcrumbs">
-            {this._parentCollections.map(collection => (
+            {this._parentCollections.map((collection, index) => (
               <iiif-explorer-breadcrumb
                 collection={collection}
+                open={index === this._parentCollections.length - 1}
               ></iiif-explorer-breadcrumb>
             ))}
           </ion-list>
-          <hr />
+          <ion-item-divider></ion-item-divider>
           <ion-list class="items">
             {this._selectedCollection.items.map(item => (
-              <ion-item>
-                <ion-icon slot="start" name="document" />
-                <ion-label>test</ion-label>
-              </ion-item>
-              // <iiif-explorer-item
-              //   item={item}
-              //   selected={
-              //     this._selectedManifest &&
-              //     this._selectedManifest.id === item.id
-              //   }
-              // ></iiif-explorer-item>
+              <iiif-explorer-item
+                item={item}
+                selected={
+                  this._selectedManifest &&
+                  this._selectedManifest.id === item.id
+                }
+              ></iiif-explorer-item>
             ))}
           </ion-list>
         </ion-content>

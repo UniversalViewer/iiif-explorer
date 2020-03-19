@@ -19,6 +19,7 @@ export namespace Components {
   }
   interface IiifExplorerBreadcrumb {
     'collection': Collection;
+    'open': boolean;
   }
   interface IiifExplorerItem {
     'item': IIIFResource;
@@ -64,6 +65,7 @@ declare namespace LocalJSX {
   interface IiifExplorerBreadcrumb {
     'collection'?: Collection;
     'onSelectBreadcrumb'?: (event: CustomEvent<any>) => void;
+    'open'?: boolean;
   }
   interface IiifExplorerItem {
     'item'?: IIIFResource;
