@@ -8,8 +8,7 @@ import {
   Prop,
   State
 } from "@stencil/core";
-import { Collection, IIIFResource, LanguageMap, Manifest } from "manifesto.js";
-import { load, parse } from "../../utils";
+import { Collection, IIIFResource, LanguageMap, loadManifest, Manifest, parseManifest } from "manifesto.js";
 
 @Component({
   tag: "iiif-explorer",
@@ -31,8 +30,8 @@ export class IIIFExplorer {
 
   protected async componentWillLoad() {
     if (this.manifest) {
-      const data = await load(this.manifest);
-      const root: IIIFResource = parse(data);
+      const data = await loadManifest(this.manifest);
+      const root: IIIFResource = parseManifest(data);
 
       if (root.getProperty("within")) {
         // if the collection is within another, get the parents
@@ -82,7 +81,7 @@ export class IIIFExplorer {
     } else {
       collection.items.sort(this._sortCollectionsFirst);
       this._parentCollections.push(collection);
-      // this._selectedCollection = collection;
+      this._selectedCollection = collection;
       this._selectedManifest = null;
       this._loaded = true;
     }
@@ -96,8 +95,8 @@ export class IIIFExplorer {
       return [];
     }
 
-    const parent = await load(url);
-    const parentManifest: IIIFResource = parse(parent);
+    const parent = await loadManifest(url);
+    const parentManifest: IIIFResource = parseManifest(parent);
 
     if (parentManifest.getProperty("within")) {
       this._followWithin(parentManifest).then((array: IIIFResource[]) => {
@@ -112,7 +111,7 @@ export class IIIFExplorer {
   protected render() {
     if (!this._loaded) {
       return <span>loading...</span>;
-    } else if (this.manifest) {
+    } else if (this._manifest) {
       // it's a manifest without a parent collection
       return (
         <div>

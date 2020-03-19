@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
+    <title>IIIF Explorer Component</title>
+    <script type="module" src="/build/iiif-explorer.esm.js"></script>
+    <script nomodule src="/build/iiif-explorer.js"></script>
+  </head>
+  <body>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const iiifExplorer = document.querySelector("iiif-explorer");
+
+        iiifExplorer.addEventListener("selectManifest", function(evt) {
+          console.log(
+            "select manifest:",
+            evt.detail.getDefaultLabel() || "no label"
+          );
+        });
+
+        iiifExplorer.addEventListener("selectCollection", function(evt) {
+          console.log(
+            "select collection:",
+            evt.detail.getDefaultLabel() || "no label"
+          );
+        });
+
+        iiifExplorer.addEventListener("upLevel", function(evt) {
+          console.log("up level:", evt.detail.getDefaultLabel() || "no label");
+        });
+
+        // const resetBtn = document.getElementById('reset');
+
+        // resetBtn.onclick = () => {
+        //     iiifExplorer.reset();
+        // }
+      });
+    </script>
+
+    <!--
+    https://cdn.rawgit.com/ryanfb/iiif-universe/gh-pages/iiif-universe.json (IIIF Universe)
+    http://digital.library.villanova.edu/Collection/vudl:3/IIIF (Villanova top-level collection)
+    https://wellcomelibrary.org/service/collections/ (Wellcome top-level collection)
+    https://edsilv.github.io/test-manifests/parent-collection.json (test collection)
+    https://edsilv.github.io/biiif-workshop/collection/index.json (biiif workshop)
+    http://iiif-3d-manifests.netlify.com/collection/index.json (iiif 3d manifests)
+    https://www.rpm-api.io/records?_format=iiif
+    -->
+
+    <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif"></iiif-explorer>
+
+    <!-- <p>
+        <button id="reset">Reset</button>
+    </p> -->
+  </body>
+</html>

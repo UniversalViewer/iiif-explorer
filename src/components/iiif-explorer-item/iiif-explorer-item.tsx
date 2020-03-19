@@ -1,5 +1,8 @@
-import { Component, h, Event, EventEmitter, Prop } from "@stencil/core";
+import { Component, Event, EventEmitter, h, Prop } from "@stencil/core";
 import { IIIFResource } from "manifesto.js";
+// import FileIcon from "../../assets/svg/file.svg";
+// import FolderIcon from "../../assets/svg/folder.svg";
+// import FolderOpenIcon from "../../assets/svg/folder-open.svg";
 
 @Component({
   tag: "iiif-explorer-item",
@@ -12,7 +15,7 @@ export class IIIFExplorerItem {
   @Event() protected selectItem: EventEmitter;
 
   protected render() {
-    return (
+    return this.item && (
       <div
         class={{
           selected: this.selected,
@@ -21,7 +24,7 @@ export class IIIFExplorerItem {
         }}
       >
         <a
-          onClick={() => this._itemSelectedHandler()}
+          onClick={() => this.selectItem.emit(this.item)}
           class={{
             "explorer-folder-link": this.item.isCollection(),
             "explorer-item-link": this.item.isManifest(),
@@ -33,9 +36,5 @@ export class IIIFExplorerItem {
         </a>
       </div>
     );
-  }
-
-  private _itemSelectedHandler() {
-    this.selectItem.emit(this.item);
   }
 }
