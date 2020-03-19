@@ -4,7 +4,7 @@
 
 Built with [StencilJS](https://stenciljs.com/)
 
-```
+```html
 <html>
 <head>
     <script src="https://unpkg.com/iiif-explorer"></script>
