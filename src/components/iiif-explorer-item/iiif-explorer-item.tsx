@@ -1,8 +1,7 @@
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core";
 import { IIIFResource } from "manifesto.js";
-// import FileIcon from "../../assets/svg/file.svg";
-// import FolderIcon from "../../assets/svg/folder.svg";
-// import FolderOpenIcon from "../../assets/svg/folder-open.svg";
+import FileIcon from "../../assets/svg/file.svg";
+import FolderIcon from "../../assets/svg/folder.svg";
 
 @Component({
   tag: "iiif-explorer-item",
@@ -15,26 +14,24 @@ export class IIIFExplorerItem {
   @Event() protected selectItem: EventEmitter;
 
   protected render() {
+    const label: string = this.item.getDefaultLabel() || "no label";
     return this.item && (
-      <div
+      <ion-item
         class={{
           selected: this.selected,
-          "explorer-folder": this.item.isCollection(),
-          "explorer-resource": this.item.isManifest()
+          "folder": this.item.isCollection(),
+          "file": this.item.isManifest()
         }}
       >
-        <a
+        <ion-icon slot="start" name="document" />
+        <ion-label
           onClick={() => this.selectItem.emit(this.item)}
-          class={{
-            "explorer-folder-link": this.item.isCollection(),
-            "explorer-item-link": this.item.isManifest(),
-            "explorer-link": true
-          }}
-          title={this.item.getDefaultLabel() || "no label"}
-        >
-          {this.item.getDefaultLabel() || "no label"}
-        </a>
-      </div>
+          title={label}>{label}</ion-label>
+      </ion-item>
     );
+
+    // src={
+    //   this.item.isCollection() ? FolderIcon : FileIcon
+    // }
   }
 }

@@ -114,8 +114,8 @@ export class IIIFExplorer {
     } else if (this._manifest) {
       // it's a manifest without a parent collection
       return (
-        <div>
-          <div class="items">
+        <ion-content>
+          <ion-list class="items">
             {
               <iiif-explorer-item
                 item={this._manifest}
@@ -125,32 +125,36 @@ export class IIIFExplorer {
                 }
               ></iiif-explorer-item>
             }
-          </div>
-        </div>
+          </ion-list>
+        </ion-content>
       );
     } else {
       return (
-        <div>
-          <div class="breadcrumbs">
+        <ion-content>
+          <ion-list class="breadcrumbs">
             {this._parentCollections.map(collection => (
               <iiif-explorer-breadcrumb
                 collection={collection}
               ></iiif-explorer-breadcrumb>
             ))}
-          </div>
+          </ion-list>
           <hr />
-          <div class="items">
+          <ion-list class="items">
             {this._selectedCollection.items.map(item => (
-              <iiif-explorer-item
-                item={item}
-                selected={
-                  this._selectedManifest &&
-                  this._selectedManifest.id === item.id
-                }
-              ></iiif-explorer-item>
+              <ion-item>
+                <ion-icon slot="start" name="document" />
+                <ion-label>test</ion-label>
+              </ion-item>
+              // <iiif-explorer-item
+              //   item={item}
+              //   selected={
+              //     this._selectedManifest &&
+              //     this._selectedManifest.id === item.id
+              //   }
+              // ></iiif-explorer-item>
             ))}
-          </div>
-        </div>
+          </ion-list>
+        </ion-content>
       );
     }
   }

@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core";
 import { Collection } from "manifesto.js";
+import FolderOpenIcon from "../../assets/svg/folder-open.svg";
 
 @Component({
   tag: "iiif-explorer-breadcrumb",
@@ -11,17 +12,18 @@ export class IIIFExplorerBreadcrumb {
   @Event() protected selectBreadcrumb: EventEmitter;
 
   protected render() {
+    const label: string = this.collection.getDefaultLabel() || "no label";
     return (
-      <div class="explorer-breadcrumb explorer-item">
-        <a
+      <ion-item class="breadcrumb item">
+        <ion-icon src={FolderOpenIcon} />
+        <ion-label
           onClick={() => this.selectBreadcrumb.emit(this.collection)}
-          class="explorer-breadcrumb-link explorer-link"
-          href="#"
-          title={this.collection.getDefaultLabel() || "no label"}
+          class="label"
+          title={label}
         >
-          {this.collection.getDefaultLabel() || "no label"}
-        </a>
-      </div>
+          {label}
+        </ion-label>
+      </ion-item>
     );
   }
 }
