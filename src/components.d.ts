@@ -15,6 +15,8 @@ import {
 export namespace Components {
   interface IiifExplorer {
     'manifest': string;
+    'pageSize': number;
+    'pagingEnabled': boolean;
     'upLevelEnabled': boolean;
   }
   interface IiifExplorerBreadcrumb {
@@ -60,6 +62,8 @@ declare namespace LocalJSX {
     'onSelectCollection'?: (event: CustomEvent<any>) => void;
     'onSelectManifest'?: (event: CustomEvent<any>) => void;
     'onUpLevel'?: (event: CustomEvent<any>) => void;
+    'pageSize'?: number;
+    'pagingEnabled'?: boolean;
     'upLevelEnabled'?: boolean;
   }
   interface IiifExplorerBreadcrumb {

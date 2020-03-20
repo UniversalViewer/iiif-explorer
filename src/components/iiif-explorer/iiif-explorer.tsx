@@ -24,6 +24,8 @@ export class IIIFExplorer {
 
   @Prop() public manifest: string;
   @Prop() public upLevelEnabled: boolean = true;
+  @Prop() public pagingEnabled: boolean = true;
+  @Prop() public pageSize: number = 25;
 
   @Event() protected selectManifest: EventEmitter;
   @Event() protected selectCollection: EventEmitter;
@@ -42,12 +44,12 @@ export class IIIFExplorer {
           while (start && !start.isCollection()) {
             start = parents.pop();
           }
-          this._switchToFolder(start as Collection);
+          this._openCollection(start as Collection);
         });
       }
 
       if (root.isCollection()) {
-        this._switchToFolder(root as Collection);
+        this._openCollection(root as Collection);
       } else {
         this._manifest = root as Manifest;
       }
@@ -76,9 +78,10 @@ export class IIIFExplorer {
     return bType.indexOf("collection") - aType.indexOf("collection");
   }
 
-  private _switchToFolder(collection: Collection): void {
+  private _openCollection(collection: Collection): void {
     if (!collection.isLoaded) {
-      collection.load().then(this._switchToFolder.bind(this));
+      // todo: allow passing a querystring param to collection.load() for paging.
+      collection.load().then(this._openCollection.bind(this));
     } else {
       collection.items.sort(this._sortCollectionsFirst);
       this._parentCollections.push(collection);
@@ -117,15 +120,13 @@ export class IIIFExplorer {
       return (
         <ion-content>
           <ion-list class="items">
-            {
-              <iiif-explorer-item
-                item={this._manifest}
-                selected={
-                  this._selectedManifest &&
-                  this._selectedManifest.id === this._manifest.id
-                }
-              ></iiif-explorer-item>
-            }
+            <iiif-explorer-item
+              item={this._manifest}
+              selected={
+                this._selectedManifest &&
+                this._selectedManifest.id === this._manifest.id
+              }
+            ></iiif-explorer-item>
           </ion-list>
         </ion-content>
       );
@@ -152,9 +153,35 @@ export class IIIFExplorer {
               ></iiif-explorer-item>
             ))}
           </ion-list>
+          {
+            this.pagingEnabled && (
+              <ion-infinite-scroll threshold="10%" onIonInfinite={e => this._loadPage(e)}>
+                <ion-infinite-scroll-content
+                  loading-spinner="dots">
+                </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            )
+          }
+
         </ion-content>
       );
     }
+  }
+
+  private _loadPage(event: any) {
+
+    console.log(event);
+
+    setTimeout(() => {
+      //this.addMoreItems();
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      // if (data.length == 1000) {
+      //   event.target.disabled = true;
+      // }
+    }, 500);
   }
 
   @Listen("selectItem")
@@ -162,7 +189,7 @@ export class IIIFExplorer {
     const item: IIIFResource = event.detail;
 
     if (item.isCollection()) {
-      this._switchToFolder(item as Collection);
+      this._openCollection(item as Collection);
       this.selectCollection.emit(item);
     } else {
       this._selectedManifest = item as Manifest;
