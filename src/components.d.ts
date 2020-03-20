@@ -17,6 +17,8 @@ export namespace Components {
     'manifest': string;
     'pageSize': number;
     'pagingEnabled': boolean;
+    'pagingLimitKey': string;
+    'pagingStartKey': string;
     'upLevelEnabled': boolean;
   }
   interface IiifExplorerBreadcrumb {
@@ -64,6 +66,8 @@ declare namespace LocalJSX {
     'onUpLevel'?: (event: CustomEvent<any>) => void;
     'pageSize'?: number;
     'pagingEnabled'?: boolean;
+    'pagingLimitKey'?: string;
+    'pagingStartKey'?: string;
     'upLevelEnabled'?: boolean;
   }
   interface IiifExplorerBreadcrumb {

@@ -35,6 +35,6 @@
   "dependencies": {
     "@ionic/core": "^5.0.5",
     "@types/node": "^13.9.1",
-    "manifesto.js": "^4.0.3"
+    "manifesto.js": "^4.0.4"
   }
 }
