@@ -4,6 +4,8 @@
 
 Built with [StencilJS](https://stenciljs.com/)
 
+  npm i iiif-explorer --save
+
 ```html
 <html>
 <head>
