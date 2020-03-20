@@ -31,6 +31,7 @@ export class IIIFExplorerItem {
           <ion-label
             onClick={() => this.selectItem.emit(this.item)}
             title={label}
+            class="noselect"
           >
             {label}
           </ion-label>

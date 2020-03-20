@@ -1,3 +1,4 @@
 ion-label {
   cursor: pointer;
+  @apply --noselect;
 }

@@ -5,4 +5,5 @@
 
 ion-label {
   cursor: pointer;
+  @apply --my-mixin;
 }

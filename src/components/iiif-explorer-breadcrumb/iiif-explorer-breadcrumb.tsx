@@ -21,6 +21,7 @@ export class IIIFExplorerBreadcrumb {
         <ion-label
           onClick={() => this.selectBreadcrumb.emit(this.collection)}
           title={label}
+          class="noselect"
         >
           {label}
         </ion-label>
