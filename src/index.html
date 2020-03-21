@@ -10,6 +10,12 @@
     <script type="module" src="/build/iiif-explorer.esm.js"></script>
     <script nomodule src="/build/iiif-explorer.js"></script>
     <link rel="stylesheet" href="/build/iiif-explorer.css" />
+    <style>
+      #scroll {
+        height: 300px;
+        overflow: auto;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -52,8 +58,10 @@
     https://www.rpm-api.io/records?_format=iiif
     -->
 
-    <!-- <iiif-explorer manifest="https://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer> -->
-    <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif" paging-enabled="true"></iiif-explorer>
+    <div id="scroll">
+      <iiif-explorer manifest="https://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer>
+      <!-- <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif" paging-enabled="true"></iiif-explorer> -->
+    </div>
 
     <!-- <p>
         <button id="reset">Reset</button>
