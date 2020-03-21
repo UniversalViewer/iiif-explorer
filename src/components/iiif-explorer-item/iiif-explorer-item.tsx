@@ -8,6 +8,7 @@ import FolderIcon from "../../assets/svg/folder.svg";
   styleUrl: "iiif-explorer-item.css"
 })
 export class IIIFExplorerItem {
+  @Prop() public enabled: boolean = true;
   @Prop() public item: IIIFResource;
   @Prop() public selected: boolean = false;
 
@@ -29,9 +30,12 @@ export class IIIFExplorerItem {
             src={this.item.isCollection() ? FolderIcon : FileIcon}
           />
           <ion-label
-            onClick={() => this.selectItem.emit(this.item)}
+            onClick={() => this.enabled ? this.selectItem.emit(this.item) : false }
             title={label}
-            class="noselect"
+            class={{
+              "noselect": true,
+              enabled: this.enabled
+            }}
           >
             {label}
           </ion-label>

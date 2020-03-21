@@ -8,8 +8,9 @@ import FolderIcon from "../../assets/svg/folder.svg";
   styleUrl: "iiif-explorer-breadcrumb.css"
 })
 export class IIIFExplorerBreadcrumb {
+  @Prop() public enabled: boolean = true;
   @Prop() public collection: Collection;
-  @Prop() public open: boolean;
+  @Prop() public isOpen: boolean;
 
   @Event() protected selectBreadcrumb: EventEmitter;
 
@@ -17,11 +18,14 @@ export class IIIFExplorerBreadcrumb {
     const label: string = this.collection.getDefaultLabel() || "no label";
     return (
       <ion-item class="breadcrumb">
-        <ion-icon src={this.open ? FolderOpenIcon : FolderIcon} slot="start" />
+        <ion-icon src={this.isOpen ? FolderOpenIcon : FolderIcon} slot="start" />
         <ion-label
-          onClick={() => this.selectBreadcrumb.emit(this.collection)}
+          onClick={() => this.enabled ? this.selectBreadcrumb.emit(this.collection) : false}
           title={label}
-          class="noselect"
+          class={{
+            "noselect": true,
+            enabled: this.enabled
+          }}
         >
           {label}
         </ion-label>

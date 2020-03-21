@@ -27,6 +27,7 @@ export class IIIFExplorer {
   @Prop() public upLevelEnabled: boolean = true;
   @Prop() public pagingStartKey: string = "_start";
   @Prop() public pagingLimitKey: string = "_limit";
+  @Prop() public pageLoadThreshold: string = "10%";
 
   @Event() protected selectCollection: EventEmitter;
   @Event() protected selectManifest: EventEmitter;
@@ -161,8 +162,9 @@ export class IIIFExplorer {
             <ion-list class="breadcrumbs">
               {this._parentCollections.map((collection, index) => (
                 <iiif-explorer-breadcrumb
+                  enabled={!this._loading}
                   collection={collection}
-                  open={index === this._parentCollections.length - 1}
+                  isOpen={index === this._parentCollections.length - 1}
                 ></iiif-explorer-breadcrumb>
               ))}
               {
@@ -180,6 +182,7 @@ export class IIIFExplorer {
         <ion-list class="items">
           {this._items.map(item => (
             <iiif-explorer-item
+              enabled={!this._loading}
               item={item}
               selected={
                 this._selectedItem &&
@@ -190,7 +193,7 @@ export class IIIFExplorer {
         </ion-list>
         {
           this._pagingEnabled && (
-            <ion-infinite-scroll threshold="10%" onIonInfinite={e => this._loadPage(e)}>
+            <ion-infinite-scroll threshold={this.pageLoadThreshold} onIonInfinite={e => this._loadPage(e)}>
               <ion-infinite-scroll-content
                 loading-spinner="dots">
               </ion-infinite-scroll-content>
