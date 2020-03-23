@@ -37,27 +37,27 @@ export class IIIFExplorerItem {
             src={this.item.isCollection() ? FolderIcon : FileIcon}
           />
           <ion-label
-            onClick={() => this.enabled ? this.selectItem.emit(this.item) : false }
+            onClick={() =>
+              this.enabled ? this.selectItem.emit(this.item) : false
+            }
             title={label}
             class={{
-              "noselect": true,
+              noselect: true,
               enabled: this.enabled
             }}
           >
             {label}
           </ion-label>
-          {
-            this.copyEnabled && (
-              <ion-icon
-                class={{
-                  "copy": true
-                }}
-                onClick={_e => this._copyValue(this.item.id)}
-                slot="end"
-                src={CopyIcon}
-              />
-            )
-          }
+          {this.copyEnabled && (
+            <ion-icon
+              class={{
+                copy: true
+              }}
+              onClick={_e => this._copyValue(this.item.id)}
+              slot="end"
+              src={CopyIcon}
+            />
+          )}
         </ion-item>
       )
     );

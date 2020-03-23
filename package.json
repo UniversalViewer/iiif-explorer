@@ -1,6 +1,6 @@
 {
   "name": "iiif-explorer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Browse and search IIIF collections",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/iiif-explorer/iiifexplorer.js",
+  "unpkg": "dist/iiif-explorer/iiif-explorer.js",
   "files": [
     "dist/",
     "loader/"
@@ -21,12 +21,17 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@stencil/core": "^1.8.8",
+    "@types/jest": "24.0.25",
+    "@types/puppeteer": "1.19.0",
+    "jest": "24.9.0",
+    "jest-cli": "24.9.0",
     "prettier": "1.18.2",
     "prettier-check": "2.0.0",
+    "puppeteer": "1.19.0",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "1.18.0",
     "typescript-tslint-plugin": "0.5.4"

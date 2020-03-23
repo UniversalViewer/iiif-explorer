@@ -85,7 +85,7 @@ export class IIIFExplorer {
   }
 
   private get _copyEnabled(): boolean {
-    return (this.copyEnabled && Clipboard.supportsCopy());
+    return this.copyEnabled && Clipboard.supportsCopy();
   }
 
   private get _pagingEnabled() {
@@ -141,7 +141,9 @@ export class IIIFExplorer {
       } else {
         this._items = collection.items;
         if (this._parentCollections.length) {
-          collection.parentCollection = this._parentCollections[this._parentCollections.length -1];
+          collection.parentCollection = this._parentCollections[
+            this._parentCollections.length - 1
+          ];
         }
         this._parentCollections.push(collection);
       }
@@ -181,7 +183,7 @@ export class IIIFExplorer {
   // }
 
   private _searchInput(e: CustomEvent): void {
-    const items = Array.from(this.el.querySelector('.items').children);
+    const items = Array.from(this.el.querySelector(".items").children);
     const query = (e.target as any).value.toLowerCase();
     requestAnimationFrame(() => {
       items.forEach(item => {
@@ -196,20 +198,22 @@ export class IIIFExplorer {
       this._parentCollections.length > 0 && (
         <ion-header>
           <ion-list class="breadcrumbs" lines="none">
-            {
-              this._loading ? (
-                <ion-item class="breadcrumb">
-                  <ion-icon src={FolderIcon} slot="start" />
-                  <ion-spinner name="dots"></ion-spinner>
-                </ion-item>
-              ) : this._parentCollections.slice(-1).map((collection, index) => (
-                <iiif-explorer-breadcrumb
-                  enabled={!this._loading}
-                  collection={collection}
-                  isOpen={index === this._parentCollections.length - 1}
-                ></iiif-explorer-breadcrumb>
-              ))
-            }
+            {this._loading ? (
+              <ion-item class="breadcrumb">
+                <ion-icon src={FolderIcon} slot="start" />
+                <ion-spinner name="dots"></ion-spinner>
+              </ion-item>
+            ) : (
+              this._parentCollections
+                .slice(-1)
+                .map((collection, index) => (
+                  <iiif-explorer-breadcrumb
+                    enabled={!this._loading}
+                    collection={collection}
+                    isOpen={index === this._parentCollections.length - 1}
+                  ></iiif-explorer-breadcrumb>
+                ))
+            )}
           </ion-list>
         </ion-header>
       ),
@@ -241,7 +245,8 @@ export class IIIFExplorer {
               onIonInput={e => this._searchInput(e)}
             ></ion-searchbar>
           </ion-toolbar>
-        </ion-footer>)
+        </ion-footer>
+      )
     ];
   }
 
