@@ -1,7 +1,9 @@
+import { Clipboard } from "@edsilv/utils";
 import { IIIFResourceType } from "@iiif/vocabulary";
-import '@ionic/core';
+import "@ionic/core";
 import {
   Component,
+  Element,
   Event,
   EventEmitter,
   h,
@@ -9,7 +11,14 @@ import {
   Prop,
   State
 } from "@stencil/core";
-import { Collection, IIIFResource, LanguageMap, loadManifest, Manifest, parseManifest } from "manifesto.js";
+import {
+  Collection,
+  IIIFResource,
+  LanguageMap,
+  loadManifest,
+  Manifest,
+  parseManifest
+} from "manifesto.js";
 import FolderIcon from "../../assets/svg/folder.svg";
 
 @Component({
@@ -21,17 +30,21 @@ export class IIIFExplorer {
   @State() private _loading: boolean;
   @State() private _selectedItem: Manifest | null;
 
+  @Prop() public copyEnabled: boolean = false;
   @Prop() public manifest: string;
-  @Prop() public pagingEnabled: boolean;
-  @Prop() public pageSize: number = 3;
-  @Prop() public upLevelEnabled: boolean = true;
-  @Prop() public pagingStartKey: string = "_start";
-  @Prop() public pagingLimitKey: string = "_limit";
   @Prop() public pageLoadThreshold: string = "10%";
+  @Prop() public pageSize: number = 50;
+  @Prop() public pagingEnabled: boolean;
+  @Prop() public pagingLimitKey: string = "_limit";
+  @Prop() public pagingStartKey: string = "_start";
+  @Prop() public searchEnabled: boolean = true;
+  @Prop() public upLevelEnabled: boolean = true;
 
   @Event() protected selectCollection: EventEmitter;
   @Event() protected selectManifest: EventEmitter;
-  @Event() protected upLevel: EventEmitter;
+  // @Event() protected upLevel: EventEmitter;
+
+  @Element() public el!: HTMLElement;
 
   private _parentCollections: Collection[] = [];
   private _currentCollectionId: string;
@@ -53,7 +66,7 @@ export class IIIFExplorer {
     this._parentCollections = this._parentCollections.slice(0, index);
     this._selectedItem = null;
     this._loadCollection(collection.id);
-    this.upLevel.emit(collection);
+    //this.upLevel.emit(collection);
   }
 
   private _sortCollectionsFirst(a: IIIFResource, b: IIIFResource): number {
@@ -71,8 +84,12 @@ export class IIIFExplorer {
     return bType.indexOf("collection") - aType.indexOf("collection");
   }
 
+  private get _copyEnabled(): boolean {
+    return (this.copyEnabled && Clipboard.supportsCopy());
+  }
+
   private get _pagingEnabled() {
-    return (this.pagingEnabled && !!this.pagingStartKey && !!this.pagingLimitKey);
+    return this.pagingEnabled && !!this.pagingStartKey && !!this.pagingLimitKey;
   }
 
   private _pageUrl(url: string, start: number, limit: number): string {
@@ -90,7 +107,10 @@ export class IIIFExplorer {
     return normalisedUrl;
   }
 
-  private async _loadCollection(collectionId: string, page: number = 0): Promise<void> {
+  private async _loadCollection(
+    collectionId: string,
+    page: number = 0
+  ): Promise<void> {
     this._loading = true;
 
     // reset currentPage if no page number is passed
@@ -99,7 +119,11 @@ export class IIIFExplorer {
     }
 
     if (this._pagingEnabled) {
-      collectionId = this._pageUrl(collectionId, this._currentPage * this.pageSize, this.pageSize);
+      collectionId = this._pageUrl(
+        collectionId,
+        this._currentPage * this.pageSize,
+        this.pageSize
+      );
     }
 
     const data = await loadManifest(collectionId);
@@ -111,12 +135,14 @@ export class IIIFExplorer {
       // if it's a manifest, just list that
       this._items = [collection];
     } else {
-
       // if we're loading more items from the current collection
       if (this._currentCollectionId === nextCollectionId) {
         this._items = [...this._items, ...collection.items];
       } else {
         this._items = collection.items;
+        if (this._parentCollections.length) {
+          collection.parentCollection = this._parentCollections[this._parentCollections.length -1];
+        }
         this._parentCollections.push(collection);
       }
 
@@ -154,54 +180,85 @@ export class IIIFExplorer {
   //   return [parentCollection, collection];
   // }
 
+  private _searchInput(e: CustomEvent): void {
+    const items = Array.from(this.el.querySelector('.items').children);
+    const query = (e.target as any).value.toLowerCase();
+    requestAnimationFrame(() => {
+      items.forEach(item => {
+        const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+        (item as HTMLElement).style.display = shouldShow ? "block" : "none";
+      });
+    });
+  }
+
   protected render() {
-    return (
-      <ion-content>
-        {
-          this._parentCollections.length > 0 && [
-            <ion-list class="breadcrumbs">
-              {this._parentCollections.map((collection, index) => (
+    return [
+      this._parentCollections.length > 0 && (
+        <ion-header>
+          <ion-list class="breadcrumbs" lines="none">
+            {
+              this._loading ? (
+                <ion-item class="breadcrumb">
+                  <ion-icon src={FolderIcon} slot="start" />
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-item>
+              ) : this._parentCollections.slice(-1).map((collection, index) => (
                 <iiif-explorer-breadcrumb
                   enabled={!this._loading}
                   collection={collection}
                   isOpen={index === this._parentCollections.length - 1}
                 ></iiif-explorer-breadcrumb>
-              ))}
-              {
-                this._loading && (
-                  <ion-item class="breadcrumb">
-                    <ion-icon src={FolderIcon} slot="start" />
-                    <ion-spinner name="dots"></ion-spinner>
-                  </ion-item>
-                )
-              }
-            </ion-list>,
-            <ion-item-divider></ion-item-divider>
-          ]
-        }
-        <ion-list class="items">
+              ))
+            }
+          </ion-list>
+        </ion-header>
+      ),
+      <ion-content>
+        <ion-list class="items" lines="none">
           {this._items.map(item => (
             <iiif-explorer-item
               enabled={!this._loading}
+              copyEnabled={this._copyEnabled}
               item={item}
-              selected={
-                this._selectedItem &&
-                this._selectedItem.id === item.id
-              }
+              selected={this._selectedItem && this._selectedItem.id === item.id}
             ></iiif-explorer-item>
           ))}
         </ion-list>
-        {
-          this._pagingEnabled && (
-            <ion-infinite-scroll threshold={this.pageLoadThreshold} onIonInfinite={e => this._loadPage(e)}>
-              <ion-infinite-scroll-content
-                loading-spinner="dots">
-              </ion-infinite-scroll-content>
-            </ion-infinite-scroll>
-          )
-        }
-      </ion-content>
-    );
+        {this._pagingEnabled && (
+          <ion-infinite-scroll
+            threshold={this.pageLoadThreshold}
+            onIonInfinite={e => this._loadPage(e)}
+          >
+            <ion-infinite-scroll-content loading-spinner="dots"></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        )}
+      </ion-content>,
+      this.searchEnabled && (
+        <ion-footer>
+          <ion-toolbar>
+            <ion-searchbar
+              placeholder="search"
+              onIonInput={e => this._searchInput(e)}
+            ></ion-searchbar>
+          </ion-toolbar>
+        </ion-footer>)
+    ];
+  }
+
+  @Listen("selectBreadcrumb")
+  protected breadcrumbSelected(event: CustomEvent) {
+    const collection: Collection = event.detail;
+    if (
+      this._normaliseCollectionId(collection.id) !== this._currentCollectionId
+    ) {
+      this._upLevel(collection);
+    }
+  }
+
+  @Listen("upLevel")
+  protected onUpLevel(event: CustomEvent) {
+    const collection: Collection = event.detail;
+    this._upLevel(collection);
   }
 
   @Listen("selectItem")
@@ -214,14 +271,6 @@ export class IIIFExplorer {
     } else {
       this._selectedItem = item as Manifest;
       this.selectManifest.emit(item);
-    }
-  }
-
-  @Listen("selectBreadcrumb")
-  protected breadcrumbSelected(event: CustomEvent) {
-    const collection: Collection = event.detail;
-    if (this._normaliseCollectionId(collection.id) !== this._currentCollectionId) {
-      this._upLevel(collection);
     }
   }
 }

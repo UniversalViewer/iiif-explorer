@@ -1,3 +1,7 @@
 ion-label {
   cursor: pointer;
 }
+
+.up-arrow {
+  cursor: pointer;
+}

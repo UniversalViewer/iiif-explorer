@@ -14,12 +14,14 @@ import {
 
 export namespace Components {
   interface IiifExplorer {
+    'copyEnabled': boolean;
     'manifest': string;
     'pageLoadThreshold': string;
     'pageSize': number;
     'pagingEnabled': boolean;
     'pagingLimitKey': string;
     'pagingStartKey': string;
+    'searchEnabled': boolean;
     'upLevelEnabled': boolean;
   }
   interface IiifExplorerBreadcrumb {
@@ -28,6 +30,7 @@ export namespace Components {
     'isOpen': boolean;
   }
   interface IiifExplorerItem {
+    'copyEnabled': boolean;
     'enabled': boolean;
     'item': IIIFResource;
     'selected': boolean;
@@ -63,15 +66,16 @@ declare global {
 
 declare namespace LocalJSX {
   interface IiifExplorer {
+    'copyEnabled'?: boolean;
     'manifest'?: string;
     'onSelectCollection'?: (event: CustomEvent<any>) => void;
     'onSelectManifest'?: (event: CustomEvent<any>) => void;
-    'onUpLevel'?: (event: CustomEvent<any>) => void;
     'pageLoadThreshold'?: string;
     'pageSize'?: number;
     'pagingEnabled'?: boolean;
     'pagingLimitKey'?: string;
     'pagingStartKey'?: string;
+    'searchEnabled'?: boolean;
     'upLevelEnabled'?: boolean;
   }
   interface IiifExplorerBreadcrumb {
@@ -79,8 +83,10 @@ declare namespace LocalJSX {
     'enabled'?: boolean;
     'isOpen'?: boolean;
     'onSelectBreadcrumb'?: (event: CustomEvent<any>) => void;
+    'onUpLevel'?: (event: CustomEvent<any>) => void;
   }
   interface IiifExplorerItem {
+    'copyEnabled'?: boolean;
     'enabled'?: boolean;
     'item'?: IIIFResource;
     'onSelectItem'?: (event: CustomEvent<any>) => void;

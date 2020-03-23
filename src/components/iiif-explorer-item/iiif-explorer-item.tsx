@@ -1,5 +1,7 @@
+import { Clipboard } from "@edsilv/utils";
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core";
 import { IIIFResource } from "manifesto.js";
+import CopyIcon from "../../assets/svg/copy.svg";
 import FileIcon from "../../assets/svg/file.svg";
 import FolderIcon from "../../assets/svg/folder.svg";
 
@@ -8,11 +10,16 @@ import FolderIcon from "../../assets/svg/folder.svg";
   styleUrl: "iiif-explorer-item.css"
 })
 export class IIIFExplorerItem {
+  @Prop() public copyEnabled: boolean = true;
   @Prop() public enabled: boolean = true;
   @Prop() public item: IIIFResource;
   @Prop() public selected: boolean = false;
 
   @Event() protected selectItem: EventEmitter;
+
+  private _copyValue(value: string) {
+    Clipboard.copy(value);
+  }
 
   protected render() {
     const label: string = this.item.getDefaultLabel() || "no label";
@@ -39,6 +46,18 @@ export class IIIFExplorerItem {
           >
             {label}
           </ion-label>
+          {
+            this.copyEnabled && (
+              <ion-icon
+                class={{
+                  "copy": true
+                }}
+                onClick={_e => this._copyValue(this.item.id)}
+                slot="end"
+                src={CopyIcon}
+              />
+            )
+          }
         </ion-item>
       )
     );

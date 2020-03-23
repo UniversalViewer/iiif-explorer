@@ -6,21 +6,29 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <title>IIIF Explorer Component</title>
+    <title>IIIF Explorer</title>
     <script type="module" src="/build/iiif-explorer.esm.js"></script>
     <script nomodule src="/build/iiif-explorer.js"></script>
     <link rel="stylesheet" href="/build/iiif-explorer.css" />
     <style>
-      #scroll {
-        height: 300px;
-        overflow: auto;
+      #container {
+        /* height: 600px; */
+        /*overflow: auto;*/
       }
     </style>
   </head>
   <body>
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const iiifExplorer = document.querySelector("iiif-explorer");
+
+      var container, iiifExplorer;
+
+      function resize() {
+        container.style.height = window.innerHeight - 130 + "px";
+      }
+
+      window.addEventListener("DOMContentLoaded", function() {
+        container = document.getElementById("container");
+        iiifExplorer = document.querySelector("iiif-explorer");
 
         iiifExplorer.addEventListener("selectManifest", function(evt) {
           console.log(
@@ -40,12 +48,13 @@
           console.log("up level:", evt.detail.getDefaultLabel() || "no label");
         });
 
-        // const resetBtn = document.getElementById('reset');
+        window.addEventListener("resize", function() {
+          resize();
+        });
 
-        // resetBtn.onclick = () => {
-        //     iiifExplorer.reset();
-        // }
+        resize();
       });
+
     </script>
 
     <!--
@@ -58,13 +67,9 @@
     https://www.rpm-api.io/records?_format=iiif
     -->
 
-    <!-- <div id="scroll"> -->
-      <iiif-explorer manifest="https://digital.library.villanova.edu/Collection/vudl:3/IIIF"></iiif-explorer>
-      <!-- <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif" paging-enabled="true"></iiif-explorer> -->
-    <!-- </div> -->
-
-    <!-- <p>
-        <button id="reset">Reset</button>
-    </p> -->
+    <div id="container">
+      <!-- <iiif-explorer manifest="https://digital.library.villanova.edu/Collection/vudl:3/IIIF" copy-enabled="true"></iiif-explorer> -->
+      <iiif-explorer manifest="https://www.rpm-api.io/records?_format=iiif" paging-enabled="true" copy-enabled="true"></iiif-explorer>
+    </div>
   </body>
 </html>

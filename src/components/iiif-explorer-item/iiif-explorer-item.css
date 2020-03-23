@@ -7,3 +7,7 @@ ion-label {
   cursor: pointer;
   @apply --my-mixin;
 }
+
+.copy {
+  cursor: pointer;
+}
