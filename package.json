@@ -1,6 +1,6 @@
 {
   "name": "iiif-explorer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browse and search IIIF collections",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/iiif-explorer/iiif-explorer.js",
+  "unpkg": "dist/iiif-explorer/iiifexplorer.js",
   "files": [
     "dist/",
     "loader/"
