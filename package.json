@@ -1,7 +1,7 @@
 {
   "name": "iiif-explorer",
   "version": "1.0.0",
-  "description": "Stencil Component Starter",
+  "description": "Browse and search IIIF collections",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
