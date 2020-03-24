@@ -93,7 +93,7 @@ export class IIIFExplorer {
   }
 
   private _pageUrl(url: string, start: number, limit: number): string {
-    const u = new URL(url);
+    const u = new URL(url, document.baseURI);
     return `${u.origin}${u.pathname}${u.search}&${this.pagingStartKey}=${start}&${this.pagingLimitKey}=${limit}`;
   }
 

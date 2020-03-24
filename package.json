@@ -1,6 +1,6 @@
 {
   "name": "iiif-explorer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Browse and search IIIF collections",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
