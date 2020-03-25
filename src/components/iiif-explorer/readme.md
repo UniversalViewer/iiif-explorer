@@ -70,6 +70,8 @@ graph TD;
   iiif-explorer-item --> ion-item
   iiif-explorer-item --> ion-icon
   iiif-explorer-item --> ion-label
+  iiif-explorer-item --> ion-button
+  ion-button --> ion-ripple-effect
   ion-infinite-scroll-content --> ion-spinner
   ion-searchbar --> ion-icon
   style iiif-explorer fill:#f9f,stroke:#333,stroke-width:4px
