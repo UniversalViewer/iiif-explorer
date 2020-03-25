@@ -4,7 +4,6 @@ import { IIIFResource } from "manifesto.js";
 import CopyIcon from "../../assets/svg/copy.svg";
 import FileIcon from "../../assets/svg/file.svg";
 import FolderIcon from "../../assets/svg/folder.svg";
-import { popoverController } from "@ionic/core";
 
 @Component({
   tag: "iiif-explorer-item",
@@ -53,16 +52,19 @@ export class IIIFExplorerItem {
               class={{
                 copy: true
               }}
-              onClick={async (ev) => {
+              onClick={async ev => {
                 Clipboard.copy(this.item.id);
-                const popover = (ev.target as any).parentElement.querySelector(".popover");
+                const popover = (ev.target as any).parentElement.querySelector(
+                  ".popover"
+                );
                 popover.classList.remove("hide");
                 // popover.style.left = (ev.target as any).offsetLeft + "px";
                 setTimeout(() => {
                   popover.classList.add("hide");
                 }, this.popoverFadeTimeout);
               }}
-              slot="end">
+              slot="end"
+            >
               <ion-icon src={CopyIcon} />
             </ion-button>
           ]}
