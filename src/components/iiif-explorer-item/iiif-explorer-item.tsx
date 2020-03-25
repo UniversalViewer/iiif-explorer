@@ -4,6 +4,7 @@ import { IIIFResource } from "manifesto.js";
 import CopyIcon from "../../assets/svg/copy.svg";
 import FileIcon from "../../assets/svg/file.svg";
 import FolderIcon from "../../assets/svg/folder.svg";
+import { popoverController } from "@ionic/core";
 
 @Component({
   tag: "iiif-explorer-item",
@@ -17,8 +18,18 @@ export class IIIFExplorerItem {
 
   @Event() protected selectItem: EventEmitter;
 
-  private _copyValue(value: string) {
-    Clipboard.copy(value);
+  private _currentPopover = null;
+
+  // private async _copyValue(value: string) {
+
+  // }
+
+  protected componentOnReady() {
+    customElements.define('copied-message', class ModalContent extends HTMLElement {
+      connectedCallback() {
+        this.innerHTML = `<span>Copied path</span>`;
+      }
+    });
   }
 
   protected render() {
@@ -48,16 +59,27 @@ export class IIIFExplorerItem {
           >
             {label}
           </ion-label>
-          {this.copyEnabled && (
-            <ion-icon
+          {this.copyEnabled && [
+            <ion-button
+              title="Copy path"
               class={{
                 copy: true
               }}
-              onClick={_e => this._copyValue(this.item.id)}
-              slot="end"
-              src={CopyIcon}
-            />
-          )}
+              onClick={async (ev) => {
+                Clipboard.copy(this.item.id);
+                const popover = await popoverController.create({
+                  component: 'copied-message',
+                  event: ev,
+                  translucent: true,
+                  showBackdrop: false
+                });
+                this._currentPopover = popover;
+                return popover.present();
+              }}
+              slot="end">
+              <ion-icon src={CopyIcon} />
+            </ion-button>
+          ]}
         </ion-item>
       )
     );

@@ -66,7 +66,6 @@ export class IIIFExplorer {
     this._parentCollections = this._parentCollections.slice(0, index);
     this._selectedItem = null;
     this._loadCollection(collection.id);
-    //this.upLevel.emit(collection);
   }
 
   private _sortCollectionsFirst(a: IIIFResource, b: IIIFResource): number {
