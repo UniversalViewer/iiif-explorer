@@ -33,6 +33,7 @@ export namespace Components {
     'copyEnabled': boolean;
     'enabled': boolean;
     'item': IIIFResource;
+    'popoverFadeTimeout': number;
     'selected': boolean;
   }
 }
@@ -90,6 +91,7 @@ declare namespace LocalJSX {
     'enabled'?: boolean;
     'item'?: IIIFResource;
     'onSelectItem'?: (event: CustomEvent<any>) => void;
+    'popoverFadeTimeout'?: number;
     'selected'?: boolean;
   }
 

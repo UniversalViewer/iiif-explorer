@@ -15,22 +15,9 @@ export class IIIFExplorerItem {
   @Prop() public enabled: boolean = true;
   @Prop() public item: IIIFResource;
   @Prop() public selected: boolean = false;
+  @Prop() public popoverFadeTimeout: number = 1000;
 
   @Event() protected selectItem: EventEmitter;
-
-  private _currentPopover = null;
-
-  // private async _copyValue(value: string) {
-
-  // }
-
-  protected componentOnReady() {
-    customElements.define('copied-message', class ModalContent extends HTMLElement {
-      connectedCallback() {
-        this.innerHTML = `<span>Copied path</span>`;
-      }
-    });
-  }
 
   protected render() {
     const label: string = this.item.getDefaultLabel() || "no label";
@@ -60,6 +47,7 @@ export class IIIFExplorerItem {
             {label}
           </ion-label>
           {this.copyEnabled && [
+            <div class="popover hide">Copied</div>,
             <ion-button
               title="Copy path"
               class={{
@@ -67,14 +55,12 @@ export class IIIFExplorerItem {
               }}
               onClick={async (ev) => {
                 Clipboard.copy(this.item.id);
-                const popover = await popoverController.create({
-                  component: 'copied-message',
-                  event: ev,
-                  translucent: true,
-                  showBackdrop: false
-                });
-                this._currentPopover = popover;
-                return popover.present();
+                const popover = (ev.target as any).parentElement.querySelector(".popover");
+                popover.classList.remove("hide");
+                // popover.style.left = (ev.target as any).offsetLeft + "px";
+                setTimeout(() => {
+                  popover.classList.add("hide");
+                }, this.popoverFadeTimeout);
               }}
               slot="end">
               <ion-icon src={CopyIcon} />

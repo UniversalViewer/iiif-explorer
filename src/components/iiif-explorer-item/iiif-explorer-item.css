@@ -11,3 +11,11 @@ ion-label {
 .copy {
   cursor: pointer;
 }
+
+.popover {
+  font-size: 11px;
+}
+
+ion-button {
+  margin-left: 10px;
+}
