@@ -195,7 +195,7 @@ export class IIIFExplorer {
   protected render() {
     return [
       this._parentCollections.length > 0 && (
-        <ion-header>
+        <ion-header class="breadcrumbs-header">
           <ion-list class="breadcrumbs" lines="none">
             {this._loading ? (
               <ion-item class="breadcrumb">

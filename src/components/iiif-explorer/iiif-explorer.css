@@ -6,6 +6,10 @@ ion-item {
   display: block;
 }
 
+ion-header {
+  min-height: 64px;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
